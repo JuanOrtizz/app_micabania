@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="negro">#000000</color>
+    <color name="blanco">#EFFFF9</color>
+    <color name="grisEditText">#D0E4DD</color>
+    <color name="grisOscuroEditText">#B7C9C2</color>
+    <color name="gris">#8E8989</color>
+    <color name="azul">#0915FF</color>
+    <color name="verdeFondoLogin">#B5EAD7</color>
+    <color name="verdeFondoApp">#CFF8E9</color>
+    <color name="verdeClaroBoton">#58BF9A</color>
+    <color name="verdeHeader">#37A67E</color>
+    <color name="verdeDatosPropiedad">#8BCAB4</color>
+    <color name="verdeOscuroCategoria">#085D3F</color>
+</resources>

@@ -1,0 +1,79 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoApp"
+    android:gravity="start"
+    android:paddingTop="28dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa) -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/verdeHeader"
+        android:gravity="center"
+        >
+
+        <!--Logo de la app-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_header"
+            />
+
+    </LinearLayout>
+
+    <!--Titulo de la seccion menu principal (bienvenida)-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Hola Nombre!"
+        android:gravity="center"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        />
+
+    <!--LinearLayout para las propiedades y el boton agregar propeidad (futuro scroll layout)-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        >
+
+        <!--Boton para entrar a la propiedad de ejemplo-->
+        <Button
+            android:id="@+id/propiedadEjemplo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Casa Grande Nono"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            />
+
+        <!--Boton para agregar propiedad-->
+        <Button
+            android:id="@+id/agregar_propiedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Agregar Propiedad"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
