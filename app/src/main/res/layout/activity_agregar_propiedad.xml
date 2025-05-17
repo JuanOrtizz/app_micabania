@@ -1,0 +1,94 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoApp"
+    android:gravity="start"
+    android:paddingTop="60dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--Boton para volver para atras-->
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/arrow_back"
+        android:background="@color/verdeFondoApp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <!--Titulo de la seccion agregar propiedad-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ingresa los datos de la nueva propiedad"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        />
+
+    <!--LinearLayout para los EditText (inputs) del formulario de registro-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+        <!--EditText para el nombre de la propiedad-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:hint="Nombre"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_border_interno"
+            />
+
+        <!--EditText para la ubicacion de la propiedad-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:hint="Ubicación"
+            android:inputType="text"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_border_interno"
+            />
+
+        <!--EditText para la cantidad de habitantes de la propiedad-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:hint="Cantidad de Habitantes"
+            android:inputType="number"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_border_interno"
+            />
+
+        <!--boton para registrar la propiedad-->
+        <Button
+            android:id="@+id/registrar_propiedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar Propiedad"
+            android:background="@drawable/button_radius"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+    </LinearLayout>
+
+</LinearLayout>

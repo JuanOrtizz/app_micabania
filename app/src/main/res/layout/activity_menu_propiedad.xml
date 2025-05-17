@@ -1,0 +1,222 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoApp"
+    android:gravity="start"
+    android:paddingTop="60dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--boton para volver atras-->
+    <ImageButton
+        android:id="@+id/volver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/arrow_back"
+        android:background="@color/verdeFondoApp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <!--LinearLayout para las caracteristicas de la propiedad-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:background="@drawable/layout_caracteristicas_propiedad">
+
+        <!--Titulo-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Caracteristicas de la propiedad"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            />
+
+        <!--LinearLayout para la caracteristica (propiedad)-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="6dp">
+
+            <!--Titulo propiedad (nombre)-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Propiedad:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                />
+
+            <!--texto (valor)-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Casa Grande Nono"
+                android:textSize="16sp"
+                android:layout_marginStart="6dp"
+                />
+
+        </LinearLayout>
+
+        <!--LinearLayout para la caracteristica (ubicacion)-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="6dp">
+
+            <!--Titulo Ubicacion-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ubicacion:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                />
+
+            <!--texto (valor)-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nono, Córdoba"
+                android:textSize="16sp"
+                android:layout_marginStart="6dp"
+                />
+
+        </LinearLayout>
+
+        <!--LinearLayout para la caracteristica (cantidad de habitantes)-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="6dp">
+
+            <!--titulo cantidad de habitantes-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad de Habitantes:"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                />
+
+            <!--texto (valor)-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6"
+                android:textSize="16sp"
+                android:layout_marginStart="6dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--LinearLayout para las categorias-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp">
+
+        <!--Titulo categorias-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Categorias"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"
+            />
+
+        <!--boton categoria cocina-->
+        <Button
+            android:id="@+id/categoriaCocina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Cocina"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--boton Categoria blanqueria-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Blanquería"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--boton categoria baño-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Baño"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--boton categoria limpieza-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Limpieza"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--boton categoria exteriores y otros-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Exteriores y otros"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp"
+            />
+
+        <!--boton eliminar propiedad-->
+        <Button
+            android:id="@+id/eliminar_propiedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Eliminar Propiedad"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

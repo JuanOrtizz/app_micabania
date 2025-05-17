@@ -1,0 +1,103 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoLogin"
+    android:gravity="start"
+    android:paddingTop="140dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--Titulo de la seccion iniciar sesion-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Inicia Sesión"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="36sp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        />
+
+    <!--LinearLayout para los editText (inputs) del formulario de inicio de sesion-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+        <!--EditText para el email del usuario-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_border_login"
+            />
+
+        <!--EditText para la contraseña del usuario-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:textSize="16sp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/edit_text_border_login"
+            />
+
+        <!--Boton para ingresar(iniciar sesion)-->
+        <Button
+            android:id="@+id/iniciar_sesion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_radius"
+            android:text="Ingresar"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+    <!--LinearLayout para registrarse-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="0dp">
+
+        <!--texto de guia-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿No sos usuario?"
+            android:layout_marginEnd="20dp"
+            android:textColor="@color/gris"/>
+
+        <!--texto para crear la cuenta-->
+        <TextView
+            android:id="@+id/crea_tu_cuenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creá tu cuenta"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/azul"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+</LinearLayout>

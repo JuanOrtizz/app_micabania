@@ -1,0 +1,75 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoApp"
+    android:gravity="start"
+    android:paddingTop="28dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa)-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/verdeHeader"
+        android:gravity="center"
+        >
+
+        <!--Logo de la app-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_header"
+            />
+
+    </LinearLayout>
+
+    <!--Titulo de la seccion soporte-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Soporte"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        />
+
+    <!--LinearLayout para los botones contactos-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        >
+
+        <!--Boton contacto SMS-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contacto via SMS"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_radius"/>
+
+        <!--Boton contacto Email-->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contacto via Email"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:background="@drawable/button_radius"/>
+
+    </LinearLayout>
+
+</LinearLayout>

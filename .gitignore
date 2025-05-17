@@ -1,31 +1,23 @@
+# Archivos de configuracion de IDE y sistema
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.gradle/
+.idea/
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
 local.properties
-# Compiled class file
+
+# Carpetas de build
+**/build/
+**/captures/
+
+# Archivos temporales de compilacion y logs
 *.class
-
-# Log file
 *.log
-
-# BlueJ files
 *.ctxt
-
-# Mobile Tools for Java (J2ME)
 .mtj.tmp/
+hs_err_pid*
+replay_pid*
 
-# Package Files #
+# Archivos empaquetados
 *.jar
 *.war
 *.nar
@@ -34,18 +26,19 @@ local.properties
 *.tar.gz
 *.rar
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
-
-# Kotlin Gradle plugin data, see https://kotlinlang.org/docs/whatsnew20.html#new-directory-for-kotlin-data-in-gradle-projects
+# Kotlin Gradle plugin data
 .kotlin/
-.idea/
-app/build/
-app/captures/
-build.gradle.kts
-gradle.properties
+
+# Archivos generados por Gradle
 gradle/
 gradlew
 gradlew.bat
-settings.gradle.kts
+
+# Archivos de configuracion de Gradle que permite
+!build.gradle.kts
+!settings.gradle.kts
+!gradle.properties
+
+# Ignora carpetas generadas dentro de app
+app/build/
+app/captures/
