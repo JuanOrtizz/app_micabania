@@ -16,14 +16,14 @@ class CategoriaCocina : AppCompatActivity() {
         setContentView(R.layout.activity_categoria_cocina)
 
         /*intent para el boton volver*/
-        val botonVolver = findViewById<ImageButton>(R.id.volver)
+        val botonVolver = findViewById<ImageButton>(R.id.botonVolver)
         botonVolver.setOnClickListener(){
             val intent = Intent(this, MenuPropiedad::class.java)
             startActivity(intent)
         }
 
         /*intent el boton agregar elemento*/
-        val botonAgregarElemento = findViewById<Button>(R.id.agregarElemento)
+        val botonAgregarElemento = findViewById<Button>(R.id.botonAgregarElemento)
         botonAgregarElemento.setOnClickListener(){
             val intent = Intent(this, AgregarElemento::class.java)
             startActivity(intent)

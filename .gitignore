@@ -33,11 +33,11 @@ replay_pid*
 gradle/
 gradlew
 gradlew.bat
+gradle.properties
 
 # Archivos de configuracion de Gradle que permite
 !build.gradle.kts
 !settings.gradle.kts
-!gradle.properties
 
 # Ignora carpetas generadas dentro de app
 app/build/

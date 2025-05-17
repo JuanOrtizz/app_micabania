@@ -1,36 +1,50 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
     android:paddingTop="60dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Boton para volver para atras-->
     <ImageButton
-        android:id="@+id/volver"
+        android:id="@+id/botonVolver"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/icon_volver"
         android:background="@color/verdeFondoApp"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="32dp"
         />
 
     <!--Titulo de la categoria, en este caso cocina. (queria consultar sobre esto, si es necesario generar una plantilla para cada seccion o hay una manera de crear una para todas y reutilizarla)-->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:orientation="horizontal"
         android:gravity="center"
-        android:text="Cocina"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:background="@drawable/text_view_categoria"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/text_view_categoria"
-        android:textColor="@color/blanco"
-        />
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/icon_cocina"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Cocina"
+            android:textColor="@color/blanco"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:gravity="center_vertical"
+            android:paddingStart="12dp"/>
+    </LinearLayout>
 
     <!--LinearLayout para los elementos de la categoria-->
     <LinearLayout
@@ -44,27 +58,44 @@
 
         <!--boton para el elemento en particular que luego abrira un overlay-->
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
             android:text="x4 Platos Playos"
             android:textStyle="bold"
             android:textSize="16sp"
+            android:textColor="@color/blanco"
             android:layout_marginBottom="16dp"
-            android:paddingStart="10dp"
             android:textAlignment="textStart"
+            android:padding="10dp"
+            android:backgroundTint="@color/verdeClaroBoton"
+            app:icon="@drawable/icon_menu_elemento"
+            app:iconGravity= "end"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "24dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
+
+
 
         <!--Boton para agregar un nuevo elemento-->
         <Button
-            android:id="@+id/agregarElemento"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonAgregarElemento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
+            android:padding="16dp"
+            android:backgroundTint="@color/azul"
             android:text="Agregar Elemento"
+            android:textSize="18sp"
             android:textStyle="bold"
-            android:textSize="16sp"
-            android:padding="12dp"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_agregar"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "24dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
     </LinearLayout>

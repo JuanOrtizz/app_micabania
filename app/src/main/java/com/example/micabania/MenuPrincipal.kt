@@ -15,17 +15,19 @@ class MenuPrincipal : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu_principal)
 
-        /*intent para el boton agregar propiedad*/
-        val botonAgregarPropiedad = findViewById<Button>(R.id.agregar_propiedad)
-        botonAgregarPropiedad.setOnClickListener(){
-            val intent = Intent(this, AgregarPropiedad::class.java)
-            startActivity(intent)
-        }
         /*intent para el boton de la Propiedad (ingresar al menu de esta)*/
-        val botonPropiedad = findViewById<Button>(R.id.propiedadEjemplo)
+        val botonPropiedad = findViewById<Button>(R.id.botonPropiedadEjemplo)
         botonPropiedad.setOnClickListener(){
             val intent = Intent(this, MenuPropiedad::class.java)
             startActivity(intent)
         }
+
+        /*intent para el boton agregar propiedad*/
+        val botonAgregarPropiedad = findViewById<Button>(R.id.botonAgregarPropiedad)
+        botonAgregarPropiedad.setOnClickListener(){
+            val intent = Intent(this, AgregarPropiedad::class.java)
+            startActivity(intent)
+        }
+
     }
 }

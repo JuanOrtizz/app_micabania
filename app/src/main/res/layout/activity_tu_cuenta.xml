@@ -1,11 +1,11 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
     android:paddingTop="28dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa)-->
     <LinearLayout
@@ -108,6 +108,7 @@
 
         <!--EditText para colocar nueva contraseña-->
         <EditText
+            android:id="@+id/etNuevaContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -122,6 +123,7 @@
 
         <!--EditText para confirmar la nueva contraseña-->
         <EditText
+            android:id="@+id/etConfirmarNuevaContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -136,12 +138,22 @@
 
         <!--Boton para cambiar contraseña-->
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonCambiarContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
+            android:padding="16dp"
+            android:backgroundTint="@color/azul"
             android:text="Cambiar Contraseña"
-            android:textSize="16sp"
-            android:padding="14dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_candado_contrasenia"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "24dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
     </LinearLayout>
