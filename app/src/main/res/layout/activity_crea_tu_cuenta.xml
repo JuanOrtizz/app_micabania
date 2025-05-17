@@ -1,18 +1,18 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoLogin"
     android:gravity="start"
     android:paddingTop="60dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Boton para volver para atras-->
     <ImageButton
-        android:id="@+id/volver"
+        android:id="@+id/botonVolver"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:src="@drawable/arrow_back"
+        android:src="@drawable/icon_volver"
         android:background="@color/verdeFondoLogin"
         android:layout_marginStart="12dp"
         android:layout_marginBottom="32dp"
@@ -45,6 +45,7 @@
 
         <!--EditText para el nombre del usaurio-->
         <EditText
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -57,6 +58,7 @@
 
         <!--EditText para el email del usuario-->
         <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -69,6 +71,7 @@
 
         <!--EditText para la contraseña del usuario-->
         <EditText
+            android:id="@+id/etContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -81,6 +84,7 @@
 
         <!--EditText para confirmar la contraseña del usuario-->
         <EditText
+            android:id="@+id/etConfirmarContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -93,13 +97,17 @@
 
         <!--Boton para registrarse-->
         <Button
-            android:id="@+id/registrarse"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonRegistrarse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:backgroundTint="@color/verdeClaroBoton"
             android:text="Registrarse"
-            android:background="@drawable/button_radius"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
     </LinearLayout>

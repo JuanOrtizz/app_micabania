@@ -1,11 +1,11 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoLogin"
     android:gravity="start"
     android:paddingTop="140dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Titulo de la seccion iniciar sesion-->
     <TextView
@@ -34,6 +34,7 @@
 
         <!--EditText para el email del usuario-->
         <EditText
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -46,6 +47,7 @@
 
         <!--EditText para la contraseña del usuario-->
         <EditText
+            android:id="@+id/etContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -58,13 +60,17 @@
 
         <!--Boton para ingresar(iniciar sesion)-->
         <Button
-            android:id="@+id/iniciar_sesion"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
+            android:padding="16dp"
+            android:backgroundTint="@color/verdeClaroBoton"
             android:text="Ingresar"
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
     </LinearLayout>
@@ -90,7 +96,7 @@
 
         <!--texto para crear la cuenta-->
         <TextView
-            android:id="@+id/crea_tu_cuenta"
+            android:id="@+id/botonCrearCuenta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Creá tu cuenta"

@@ -16,14 +16,14 @@ class AgregarPropiedad : AppCompatActivity() {
         setContentView(R.layout.activity_agregar_propiedad)
 
         /*intent para el boton volver*/
-        val botonVolver = findViewById<ImageButton>(R.id.volver)
+        val botonVolver = findViewById<ImageButton>(R.id.botonVolver)
         botonVolver.setOnClickListener(){
             val intent = Intent(this, MenuPrincipal::class.java)
             startActivity(intent)
         }
 
         /*intent para el boton registrar propiedad*/
-        val botonRegistrarPropiedad = findViewById<Button>(R.id.registrar_propiedad)
+        val botonRegistrarPropiedad = findViewById<Button>(R.id.botonRegistrarPropiedad)
         botonRegistrarPropiedad.setOnClickListener(){
             val intent = Intent(this, MenuPrincipal::class.java)
             startActivity(intent)

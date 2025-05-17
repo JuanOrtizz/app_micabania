@@ -1,11 +1,11 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
     android:paddingTop="28dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa)-->
     <LinearLayout
@@ -53,22 +53,44 @@
 
         <!--Boton contacto SMS-->
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonContactoSms"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:padding="10dp"
+            android:backgroundTint="@color/verdeClaroBoton"
             android:text="Contacto via SMS"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:layout_marginBottom="24dp"
-            android:background="@drawable/button_radius"/>
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_sms"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "35dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+            />
 
         <!--Boton contacto Email-->
         <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonContactoMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:backgroundTint="@color/verdeClaroBoton"
             android:text="Contacto via Email"
-            android:textStyle="bold"
             android:textSize="18sp"
-            android:background="@drawable/button_radius"/>
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_email"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "35dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+            />
 
     </LinearLayout>
 

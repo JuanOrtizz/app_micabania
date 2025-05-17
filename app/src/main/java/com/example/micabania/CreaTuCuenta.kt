@@ -14,13 +14,13 @@ class CreaTuCuenta : AppCompatActivity() {
         setContentView(R.layout.activity_crea_tu_cuenta)
 
         /*intent para el boton volver*/
-        val botonVolver = findViewById<ImageButton>(R.id.volver)
+        val botonVolver = findViewById<ImageButton>(R.id.botonVolver)
         botonVolver.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
         /*intent para el boton registrarse*/
-        val botonRegistrarse = findViewById<Button>(R.id.registrarse)
+        val botonRegistrarse = findViewById<Button>(R.id.botonRegistrarse)
         botonRegistrarse.setOnClickListener(){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

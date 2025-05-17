@@ -9,7 +9,9 @@
     <color name="verdeFondoLogin">#B5EAD7</color>
     <color name="verdeFondoApp">#CFF8E9</color>
     <color name="verdeClaroBoton">#58BF9A</color>
+    <color name="verdePropiedad">#3C8D70</color>
     <color name="verdeHeader">#37A67E</color>
     <color name="verdeDatosPropiedad">#8BCAB4</color>
     <color name="verdeOscuroCategoria">#085D3F</color>
+    <color name="rojo">#FF6B6B</color>
 </resources>

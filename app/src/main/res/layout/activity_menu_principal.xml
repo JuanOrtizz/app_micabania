@@ -1,11 +1,11 @@
-<LinearLayout
-    android:orientation="vertical"
+<LinearLayout android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
     android:paddingTop="28dp"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa) -->
     <LinearLayout
@@ -28,6 +28,7 @@
 
     <!--Titulo de la seccion menu principal (bienvenida)-->
     <TextView
+        android:id="@+id/textBienvenida"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="¡Hola Nombre!"
@@ -48,30 +49,47 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        >
+        android:layout_marginEnd="24dp">
 
         <!--Boton para entrar a la propiedad de ejemplo-->
         <Button
-            android:id="@+id/propiedadEjemplo"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonPropiedadEjemplo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:backgroundTint="@color/verdePropiedad"
             android:text="Casa Grande Nono"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_propiedad"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "30dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
         <!--Boton para agregar propiedad-->
         <Button
-            android:id="@+id/agregar_propiedad"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/botonAgregarPropiedad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_radius"
+            android:padding="16dp"
+            android:backgroundTint="@color/azul"
             android:text="Agregar Propiedad"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:icon="@drawable/icon_agregar"
+            app:iconGravity= "textStart"
+            app:iconPadding = "12dp"
+            app:iconTint = "@color/blanco"
+            app:iconSize = "24dp"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
     </LinearLayout>

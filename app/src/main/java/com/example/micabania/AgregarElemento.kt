@@ -16,14 +16,14 @@ class AgregarElemento : AppCompatActivity() {
         setContentView(R.layout.activity_agregar_elemento)
 
         /*intent para el boton volver*/
-        val botonVolver = findViewById<ImageButton>(R.id.volver)
+        val botonVolver = findViewById<ImageButton>(R.id.botonVolver)
         botonVolver.setOnClickListener(){
             val intent = Intent(this, CategoriaCocina::class.java)
             startActivity(intent)
         }
 
         /*intent para el boton Registrar elemento*/
-        val botonRegistrarElemento = findViewById<Button>(R.id.registrarElemento)
+        val botonRegistrarElemento = findViewById<Button>(R.id.botonRegistrarElemento)
         botonRegistrarElemento.setOnClickListener(){
             val intent = Intent(this, CategoriaCocina::class.java)
             startActivity(intent)
