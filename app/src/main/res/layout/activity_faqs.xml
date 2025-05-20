@@ -54,7 +54,7 @@
                 android:layout_marginEnd="24dp"
                 />
 
-            <!--LinearLayout para las preguntas recientes (la idea es que sea un scroll layout, pero queria consutlarlo)-->
+            <!--LinearLayout para las preguntas recientes-->
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
