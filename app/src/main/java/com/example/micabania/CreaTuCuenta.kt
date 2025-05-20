@@ -32,6 +32,7 @@ class CreaTuCuenta : AppCompatActivity() {
             var banderaInputContraseña = verificarInputContraseña()
             var banderaInputConfirmarContraseña = verificarInputConfirmarContraseña()
 
+            // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
             if (banderaInputNombre && banderaInputEmail && banderaInputContraseña && banderaInputConfirmarContraseña){
                 val intent = Intent(this, MainActivity::class.java) // crea un intent para volver a la pantalla login
                 intent.putExtra("mensaje_snackbar", "Te registraste con éxito") // el titulo del mensaje y el mensaje que devuelve
