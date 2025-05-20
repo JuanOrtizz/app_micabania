@@ -26,124 +26,138 @@
 
     </LinearLayout>
 
-    <!--Titulo de la seccion FAQs-->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="FAQs y Tutoriales"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:scrollbars="none">
 
-    <!--LinearLayout para las preguntas recientes (la idea es que sea un scroll layout, pero queria consutlarlo)-->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        >
-
-        <!--LinearLayout para una pregunta-->
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/layout_faqs"
-            android:layout_marginBottom="24dp">
+            android:layout_height="wrap_content">
 
-            <!--Titulo de la pregunta-->
+            <!--Titulo de la seccion FAQs-->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="¿Cómo registrar una propiedad?"
-                android:textSize="18sp"
+                android:text="FAQs y Tutoriales"
+                android:gravity="center"
+                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@color/blanco"
-                android:layout_marginBottom="6dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 />
 
-            <!--Texto de la pregunta-->
-            <TextView
+            <!--LinearLayout para las preguntas recientes (la idea es que sea un scroll layout, pero queria consutlarlo)-->
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="En el menú principal de la aplicación, puedes agregar una propiedad seleccionando la opción correspondiente y completando el formulario. Luego, debes presionar el botón *Registrar propiedad* para finalizar el proceso."
-                android:textSize="15sp"
-                android:textColor="@color/blanco"
-            />
+                android:gravity="center"
+                >
+
+                <!--LinearLayout para una pregunta-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/layout_faqs"
+                    android:layout_marginBottom="24dp">
+
+                    <!--Titulo de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo registrar una propiedad?"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blanco"
+                        android:layout_marginBottom="6dp"
+                        />
+
+                    <!--Texto de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="En el menú principal de la aplicación, puedes agregar una propiedad seleccionando la opción correspondiente y completando el formulario. Luego, debes presionar el botón *Registrar propiedad* para finalizar el proceso."
+                        android:textSize="15sp"
+                        android:textColor="@color/blanco"
+                    />
+
+                </LinearLayout>
+
+                <!--LinearLayout para una pregunta-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@drawable/layout_faqs"
+                    android:layout_marginBottom="24dp">
+
+                    <!--Titulo de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo visualizar el inventario de una propiedad?"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blanco"
+                        android:layout_marginBottom="6dp"
+                        />
+
+                    <!--Texto de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Para ver el inventario de una propiedad, accede a la propiedad deseada. Una vez dentro, encontrarás las distintas categorías del inventario y, dentro de cada una, los elementos previamente registrados."
+                        android:textSize="15sp"
+                        android:textColor="@color/blanco"
+                        />
+
+                </LinearLayout>
+
+                <!--LinearLayout para una pregunta-->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/layout_faqs">
+
+                    <!--Titulo de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="¿Cómo agregar un elemento al inventario?"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blanco"
+                        android:layout_marginBottom="6dp"
+                        />
+
+                    <!--Texto de la pregunta-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Para añadir un elemento al inventario, accede a la categoría correspondiente y selecciona la opción *Agregar elemento*. Luego, completa el formulario con el nombre y la cantidad de stock del elemento. Si deseas eliminar un elemento del stock o eliminarlo por completo, selecciona el elemento en cuestión y elige entre las opciones de *Restar stock* o *Eliminar elemento*. También puedes agregar unidades individuales sin necesidad de crear nuevamente el elemento para actualizar su stock."
+                        android:textSize="15sp"
+                        android:textColor="@color/blanco"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!--LinearLayout para una pregunta-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/layout_faqs"
-            android:layout_marginBottom="24dp">
-
-            <!--Titulo de la pregunta-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="¿Cómo visualizar el inventario de una propiedad?"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/blanco"
-                android:layout_marginBottom="6dp"
-                />
-
-            <!--Texto de la pregunta-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Para ver el inventario de una propiedad, accede a la propiedad deseada. Una vez dentro, encontrarás las distintas categorías del inventario y, dentro de cada una, los elementos previamente registrados."
-                android:textSize="15sp"
-                android:textColor="@color/blanco"
-                />
-
-        </LinearLayout>
-
-        <!--LinearLayout para una pregunta-->
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:background="@drawable/layout_faqs">
-
-            <!--Titulo de la pregunta-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="¿Cómo agregar un elemento al inventario?"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@color/blanco"
-                android:layout_marginBottom="6dp"
-                />
-
-            <!--Texto de la pregunta-->
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Para añadir un elemento al inventario, accede a la categoría correspondiente y selecciona la opción *Agregar elemento*. Luego, completa el formulario con el nombre y la cantidad de stock del elemento.
-                    Si deseas eliminar un elemento del stock o eliminarlo por completo, selecciona el elemento en cuestión y elige entre las opciones de *Restar stock* o *Eliminar elemento*. También puedes agregar unidades individuales sin necesidad de crear nuevamente el elemento para actualizar su stock."
-                android:textSize="15sp"
-                android:textColor="@color/blanco"
-                />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
