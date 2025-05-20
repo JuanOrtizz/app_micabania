@@ -1,4 +1,5 @@
 <LinearLayout android:orientation="vertical"
+    android:id="@+id/vista_tu_cuenta"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
@@ -51,33 +52,50 @@
         android:layout_marginEnd="24dp"
         >
 
-        <!--EditText para el nombre dle usuario (con focusable y clickable, le saco la posibilidad de cambios)-->
-        <EditText
+        <!--EditText para el nombre del usuario (con enabled false le saco la posibilidad de cambios)-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:hint="Nombre del Usuario"
-            android:inputType="textPersonName"
-            android:textSize="16sp"
+            android:hint="Nombre del usuario"
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisOscuroEditText"
+            app:boxStrokeWidth ="0dp"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/edit_text_border_tu_cuenta"
-            android:focusable="false"
-            android:clickable="false"
-            />
+            >
 
-        <!--EditText para el email del usuario (con focusable y clickable, le saco la posibilidad de cambios)-->
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:enabled="false"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--EditText para el email del usuario (con enable = false le saco la posibilidad de cambios)-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Email del usuario"
-            android:inputType="textPersonName"
-            android:textSize="16sp"
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisOscuroEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/edit_text_border_tu_cuenta"
-            android:focusable="false"
-            android:clickable="false"
-            />
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:enabled="false"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -107,34 +125,66 @@
         >
 
         <!--EditText para colocar nueva contraseña-->
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etNuevaContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Nueva contraseña"
-            android:inputType="textPassword"
-            android:textSize="16sp"
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/edit_text_border_interno"
-            android:focusable="false"
-            android:clickable="false"
-            />
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:endIconMode="password_toggle"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--EditText para confirmar la nueva contraseña-->
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etConfirmarNuevaContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Confirma tu nueva contraseña"
-            android:inputType="textPassword"
-            android:textSize="16sp"
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
             android:layout_marginBottom="14dp"
-            android:background="@drawable/edit_text_border_interno"
-            android:focusable="false"
-            android:clickable="false"
-            />
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:endIconMode="password_toggle"
+            app:counterEnabled="true"
+            app:counterMaxLength="30"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--Boton para cambiar contraseña-->
         <Button

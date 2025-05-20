@@ -44,7 +44,7 @@
         android:layout_marginTop="16dp"
         >
 
-        <!--EditText para el nombre del usaurio-->
+        <!--EditText para el nombre del usuario-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
