@@ -34,30 +34,64 @@
         >
 
         <!--EditText para el email del usuario-->
-        <EditText
+        <!--EditText para el email del usuario-->
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_border_login"
-            />
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/blanco"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="320">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--EditText para la contraseña del usuario-->
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etContraseña"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Contraseña"
-            android:inputType="textPassword"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_border_login"
-            />
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/blanco"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:endIconMode="password_toggle"
+            app:counterEnabled="true"
+            app:counterMaxLength="30">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--Boton para ingresar(iniciar sesion)-->
         <Button
