@@ -44,30 +44,62 @@
         >
 
         <!--EditText para el nombre del elemento-->
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Nombre"
-            android:inputType="text"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_border_interno"
-            />
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="100">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--EditText para el stock del elemento-->
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/etStock"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
             android:hint="Stock"
-            android:inputType="number"
-            android:textSize="16sp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/edit_text_border_interno"
-            />
+            android:textColorHint ="@color/gris"
+            app:hintTextColor ="@color/gris"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="3">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <!--boton para registrar el elemento-->
         <Button
