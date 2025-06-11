@@ -1,4 +1,5 @@
 <LinearLayout android:orientation="vertical"
+    android:id="@+id/vista_menu_principal"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
@@ -7,24 +8,40 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa) -->
-    <LinearLayout
-        android:orientation="vertical"
+    <!--ConstraintLayout para la barra de navegacion (menu hamburguesa) -->
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:background="@color/verdeHeader"
-        android:gravity="center"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="30dp"
         >
 
-        <!--Logo de la app-->
+        <!-- Icono menú hamburguesa a la izquierda -->
+        <ImageButton
+            android:id="@+id/botonMenuHamburguesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_menu_hamburguesa"
+            android:background="@null"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <!-- Logo centrado horizontalmente -->
         <ImageView
+            android:id="@+id/logoApp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_header"
-            />
+            android:contentDescription="Logo de la app"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!--Titulo de la seccion menu principal (bienvenida)-->
     <TextView
@@ -41,13 +58,13 @@
         android:layout_marginEnd="24dp"
         />
 
-    <!--LinearLayout para las propiedades y el boton agregar propeidad (futuro scroll layout)-->
+    <!--LinearLayout para las propiedades (futuro scroll layout)-->
     <LinearLayout
+        android:id="@+id/layoutPropiedades"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp">
 
@@ -72,26 +89,28 @@
             app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
 
-        <!--Boton para agregar propiedad-->
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonAgregarPropiedad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:backgroundTint="@color/azul"
-            android:text="Agregar Propiedad"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            app:icon="@drawable/icon_agregar"
-            app:iconGravity= "textStart"
-            app:iconPadding = "12dp"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "24dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
-            />
-
     </LinearLayout>
+    <!--Boton para agregar propiedad-->
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/botonAgregarPropiedad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:padding="16dp"
+        android:backgroundTint="@color/azul"
+        android:text="Agregar Propiedad"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/blanco"
+        app:icon="@drawable/icon_agregar"
+        app:iconGravity= "textStart"
+        app:iconPadding = "12dp"
+        app:iconTint = "@color/blanco"
+        app:iconSize = "24dp"
+        app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+        />
+
 
 </LinearLayout>
