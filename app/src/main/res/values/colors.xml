@@ -13,5 +13,7 @@
     <color name="verdeHeader">#37A67E</color>
     <color name="verdeDatosPropiedad">#8BCAB4</color>
     <color name="verdeOscuroCategoria">#085D3F</color>
+    <color name="verdeElementosMenu">#0C885C</color>
     <color name="rojo">#FF6B6B</color>
+    <color name="rojoOscuro">#800202</color>
 </resources>
