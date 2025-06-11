@@ -5,25 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.view.View.TEXT_ALIGNMENT_TEXT_START
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 
-class CategoriaCocina : AppCompatActivity() {
+class Categoria : AppCompatActivity() {
     private lateinit var btnVolver:ImageButton
     private lateinit var imgCategoria:ImageView
     private lateinit var txtCategoria:TextView
@@ -34,7 +28,7 @@ class CategoriaCocina : AppCompatActivity() {
     //Funcion OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_categoria_cocina)
+        setContentView(R.layout.activity_categoria)
 
         //Inicializo variables
         btnVolver = findViewById(R.id.botonVolver)
