@@ -1,4 +1,5 @@
 <LinearLayout android:orientation="vertical"
+    android:id="@+id/vista_categoria_cocina"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
@@ -31,14 +32,15 @@
         android:paddingEnd="16dp">
 
         <ImageView
+            android:id="@+id/imgCategoria"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/icon_cocina"/>
 
         <TextView
+            android:id="@+id/txtCategoria"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Cocina"
             android:textColor="@color/blanco"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -48,6 +50,7 @@
 
     <!--LinearLayout para los elementos de la categoria-->
     <LinearLayout
+        android:id="@+id/layoutElementos"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,10 +61,10 @@
 
         <!--boton para el elemento en particular que luego abrira un overlay-->
         <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnElemento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="x4 Platos Playos"
+            android:text="x5 Platos playos"
             android:textStyle="bold"
             android:textSize="16sp"
             android:textColor="@color/blanco"
@@ -70,34 +73,39 @@
             android:padding="10dp"
             android:backgroundTint="@color/verdeClaroBoton"
             app:icon="@drawable/icon_menu_elemento"
-            app:iconGravity= "end"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "24dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+            app:iconGravity="end"
+            app:iconTint="@color/blanco"
+            app:iconSize="24dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:singleLine="true"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent"
+
             />
 
-
-
-        <!--Boton para agregar un nuevo elemento-->
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonAgregarElemento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:backgroundTint="@color/azul"
-            android:text="Agregar Elemento"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            app:icon="@drawable/icon_agregar"
-            app:iconGravity= "textStart"
-            app:iconPadding = "12dp"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "24dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
-            />
 
     </LinearLayout>
+    <!--Boton para agregar un nuevo elemento-->
+    <Button
+        style="@style/Widget.Material3.Button.ElevatedButton"
+        android:id="@+id/botonAgregarElemento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginTop="12dp"
+        android:padding="16dp"
+        android:backgroundTint="@color/azul"
+        android:text="Agregar Elemento"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/blanco"
+        app:icon="@drawable/icon_agregar"
+        app:iconGravity= "textStart"
+        app:iconPadding = "12dp"
+        app:iconTint = "@color/blanco"
+        app:iconSize = "24dp"
+        app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+        />
 
 </LinearLayout>
