@@ -1,5 +1,6 @@
 package com.example.micabania
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,118 +13,134 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class TuCuenta : AppCompatActivity() {
+    // Declaro variable
+    private lateinit var btnCambiarContraseña:Button
+    private lateinit var etNuevaContraseña:TextInputLayout
+    private lateinit var etConfirmarNuevaContraseña:TextInputLayout
+
+    //Metodo OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_tu_cuenta)
 
-        /*intent para el boton registrarse*/
-        val botonCambiarContraseña = findViewById<Button>(R.id.botonCambiarContraseña)
-        botonCambiarContraseña.setOnClickListener(){
-            currentFocus?.clearFocus()
+        // Inicializo la variable al cargar la activity
+        btnCambiarContraseña = findViewById<Button>(R.id.botonCambiarContraseña)
+        etNuevaContraseña = findViewById(R.id.etNuevaContraseña)
+        etConfirmarNuevaContraseña = findViewById(R.id.etConfirmarNuevaContraseña)
+
+        /*Listener para el boton registrarse*/
+        btnCambiarContraseña.setOnClickListener(){
+            currentFocus?.clearFocus()// Elimino el foco de los ET
+            // Declaro banderas para verificar si los datos ingresados en los ET son validos.
             var banderaInputContraseña = verificarInputNuevaContraseña()
             var banderaInputConfirmarContraseña = verificarInputConfirmarNuevaContraseña()
 
+            // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
             if (banderaInputContraseña && banderaInputConfirmarContraseña){
-                limpiarET()
-                val contextView = findViewById<View>(R.id.vista_tu_cuenta)
-                Snackbar.make(contextView, "Cambiaste tu contraseña", Snackbar.LENGTH_LONG).show()
+                DialogConfirmacion(
+                    onConfirmar = {
+                        // Va a ir logica para actualizar la contraseña en la DB
+                        limpiarET() //Limpia los ET
+                        mostrarSnackbar(R.id.vista_tu_cuenta, "Cambiaste tu contraseña") //Muestra el Snackbar
+                    }
+                ).show(supportFragmentManager, "ConfirmDialog")
             }
         }
     }
 
     // Funcion para limpiar los campos EditText al cambiar contraseña
     private fun limpiarET(){
-        val etNuevaContraseña = findViewById<TextInputLayout>(R.id.etNuevaContraseña)
-        val etConfirmarNuevaContraseña = findViewById<TextInputLayout>(R.id.etConfirmarNuevaContraseña)
         etNuevaContraseña.editText?.text?.clear()
         etConfirmarNuevaContraseña.editText?.text?.clear()
     }
 
-    //Funcion para mostrar errores en los et.
-    private fun errorCondicion (input: TextInputLayout, condicion:Boolean, mensaje:String){
-        if (condicion){ // si es nulo o vacio
+    //Funcion para mostrar el snackbar
+    private fun mostrarSnackbar (idVista:Int, mensaje:String){
+        // obtengo el contexto donde se va a mostrar el snackbar
+        val contextView = findViewById<View>(idVista)
+        // Crea el snackbar
+        Snackbar.make(contextView, mensaje, Snackbar.LENGTH_LONG).show()
+    }
+
+    //Funcion para mostrar errores en los inputs (ETs)
+    private fun errorCondicion(input: TextInputLayout, errores: Boolean, mensaje: String) {
+        if (errores) { // Si es verdadero entra aca (es decir, hay errores)
             input.boxStrokeWidth = 4 // le agrega el borde para el error
             input.isErrorEnabled = true // habilita el campo
-            input.error = mensaje // agrega  el texto
-        } else {
+            input.error = mensaje // agrega  el texto de error
+        } else { // Si es falso entra en este bloque (no hay errores)
             input.error = null  // Si soluciona el error lo borra
             input.isErrorEnabled = false // y desactiva su campo
         }
     }
 
-    // funciones para verificar inputs
-    // funcion para verificar input nueva contraseña
+    //Funciones para validar inputs (ETs)
+    //Funcion para validar Input (ET) Nueva Contraseña
     private fun verificarInputNuevaContraseña():Boolean{
-        val inputNuevaContraseña = findViewById<TextInputLayout>(R.id.etNuevaContraseña)
-
-        var banderaInternaNuevaContraseña = verificarTextoNuevaContraseña(inputNuevaContraseña)
-
-        inputNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+        var banderaInternaNuevaContraseña = verificarTextoNuevaContraseña()
+        etNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                inputNuevaContraseña.isErrorEnabled = false
+                etNuevaContraseña.isErrorEnabled = false
             } else{
-                verificarTextoNuevaContraseña(inputNuevaContraseña)
+                verificarTextoNuevaContraseña()
             }
         }
         return banderaInternaNuevaContraseña
     }
 
-    // funcion para verificar input nueva contraseña
+    //Funcion para validar Input (ET) Confirmar Nueva Contraseña
     private fun verificarInputConfirmarNuevaContraseña():Boolean{
-        val inputNuevaContraseña = findViewById<TextInputLayout>(R.id.etNuevaContraseña)
-        val inputConfirmarNuevaContraseña = findViewById<TextInputLayout>(R.id.etConfirmarNuevaContraseña)
-        var banderaInternaConfirmarNuevaContraseña = verificarTextoConfirmarNuevaContraseña(inputNuevaContraseña, inputConfirmarNuevaContraseña)
-        inputConfirmarNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+        var banderaInternaConfirmarNuevaContraseña = verificarTextoConfirmarNuevaContraseña()
+        etConfirmarNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                inputConfirmarNuevaContraseña.isErrorEnabled = false
+                etConfirmarNuevaContraseña.isErrorEnabled = false
             } else{
-                verificarTextoConfirmarNuevaContraseña(inputNuevaContraseña, inputConfirmarNuevaContraseña)
+                verificarTextoConfirmarNuevaContraseña()
             }
         }
         return banderaInternaConfirmarNuevaContraseña
     }
 
-    // funciones internas de verificacion de inputs
-    // funcion interna con verificaciones para nueva contraseña
-    private fun verificarTextoNuevaContraseña(inputNuevaContraseña: TextInputLayout):Boolean{
-        val textoNuevaContraseña = inputNuevaContraseña.editText?.text?.toString() // captura el texto del et
+    // Funciones internas para validar el texto (valor) que ingresa el usuario por los Inputs (ETs)
+    //Funcion para validar texto (valor) Input (ET) Nueva Contraseña
+    private fun verificarTextoNuevaContraseña():Boolean{
+        val textoNuevaContraseña = etNuevaContraseña.editText?.text?.toString() // captura el texto del et
         if (textoNuevaContraseña.isNullOrEmpty()) {
-            errorCondicion(inputNuevaContraseña, true, "Este campo no puede estar vacío")
+            errorCondicion(etNuevaContraseña, true, "Este campo no puede estar vacío")
             return false
         } else if (textoNuevaContraseña.length > 30) {
-            errorCondicion(inputNuevaContraseña, true, "La contraseña no puede tener más de 30 caracteres")
+            errorCondicion(etNuevaContraseña, true, "La contraseña no puede tener más de 30 caracteres")
             return false
         } else if (textoNuevaContraseña.length < 8) {
-            errorCondicion(inputNuevaContraseña, true, "La contraseña debe tener al menos 8 caracteres")
+            errorCondicion(etNuevaContraseña, true, "La contraseña debe tener al menos 8 caracteres")
             return false
         }else if(!textoNuevaContraseña.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\\$%^&*()_\\-+=\\[\\]{};':\"\\\\|,.<>\\/?]).*\$"))) {
-            errorCondicion(inputNuevaContraseña, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
+            errorCondicion(etNuevaContraseña, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
             return false
-            // aca va a ir otro if para comprobar que no coloque la misma contraseña cuando conectemos con DB
+            //Cuando agregue DB va a ir otro if para comprobar que no coloque la misma contraseña
         }else {
-            errorCondicion(inputNuevaContraseña, false, "")
+            errorCondicion(etNuevaContraseña, false, "")
             return true
         }
     }
 
-    //Funcion interna con verificaciones para confirmar la nueva contraseña
-    private fun verificarTextoConfirmarNuevaContraseña(inputNuevaContraseña: TextInputLayout, inputConfirmarNuevaContraseña: TextInputLayout):Boolean{
-        val textoNuevaContraseña = inputNuevaContraseña.editText?.text?.toString() // captura el texto del et
-        val textoConfirmarNuevaContraseña = inputConfirmarNuevaContraseña.editText?.text?.toString() // captura el texto del et
+    //Funcion para validar texto (valor) Input (ET) Nueva Contraseña
+    private fun verificarTextoConfirmarNuevaContraseña():Boolean{
+        val textoNuevaContraseña = etNuevaContraseña.editText?.text?.toString() // captura el texto del et
+        val textoConfirmarNuevaContraseña = etConfirmarNuevaContraseña.editText?.text?.toString() // captura el texto del et
 
         if(textoConfirmarNuevaContraseña.isNullOrEmpty()){
-            errorCondicion(inputConfirmarNuevaContraseña, true, "Este campo no puede estar vacio")
+            errorCondicion(etConfirmarNuevaContraseña, true, "Este campo no puede estar vacio")
             return false
         }else if(textoConfirmarNuevaContraseña.length > 30){
-            errorCondicion(inputConfirmarNuevaContraseña, true, "La contraseña no puede tener mas de 30 caracteres" )
+            errorCondicion(etConfirmarNuevaContraseña, true, "La contraseña no puede tener mas de 30 caracteres" )
             return false
         }else if(!textoConfirmarNuevaContraseña.equals(textoNuevaContraseña)){
-            errorCondicion(inputConfirmarNuevaContraseña, true, "Las contraseñas no coinciden" )
+            errorCondicion(etConfirmarNuevaContraseña, true, "Las contraseñas no coinciden" )
             return false
         }
         else {
-            errorCondicion(inputConfirmarNuevaContraseña, false, "")
+            errorCondicion(etConfirmarNuevaContraseña, false, "")
             return true
         }
     }
