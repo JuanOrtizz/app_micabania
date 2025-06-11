@@ -10,16 +10,21 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class Soporte : AppCompatActivity() {
+    // Declaro variables
+    private lateinit var btnSMS:Button
+    private lateinit var btnEmail:Button
+
+    // Funcion OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_soporte)
 
-        val botonSms = findViewById<Button>(R.id.botonContactoSms)
-        val botonEmail = findViewById<Button>(R.id.botonContactoMail)
+        // Inicializo las variables al cargar la activity
+        btnSMS = findViewById(R.id.botonContactoSms)
+        btnEmail = findViewById(R.id.botonContactoMail)
 
         // Listener para el boton contacto via sms
-        botonSms.setOnClickListener {
+        btnSMS.setOnClickListener {
             val numero = "" // <-- numero de soporte de la app
             val mensaje = "Hola, necesito ayuda con la aplicación" // mensaje predefinido
 
@@ -31,9 +36,10 @@ class Soporte : AppCompatActivity() {
         }
 
         // Listener para el boton contacto via Email
-        botonEmail.setOnClickListener{
+        btnEmail.setOnClickListener{
+            val email = ""
             val intent = Intent(Intent.ACTION_SENDTO).apply { // indica que abra la app para emails y cree un correo para la direccion de soporte con un asunto predefinido
-                data = Uri.parse("mailto:jaja@gmail.com") // direccion de soporte
+                data = Uri.parse("mailto:$email") // direccion de soporte
                 putExtra(Intent.EXTRA_SUBJECT, "Consulta sobre la app") // asunto del mail
             }
             startActivity(intent)// inicia la app para enviar el email
