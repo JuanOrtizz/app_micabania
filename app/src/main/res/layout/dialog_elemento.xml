@@ -10,6 +10,7 @@
     android:layout_marginEnd="24dp"
     android:layout_marginStart="24dp">
 
+    <!--ImageButton para cerrar el dialog-->
     <ImageButton
         android:id="@+id/btnCerrar"
         android:layout_width="48dp"
@@ -20,7 +21,7 @@
         android:layout_marginBottom="8dp"
         />
 
-
+    <!--TextView con el nombre del elemento-->
     <TextView
         android:id="@+id/txtElemento"
         android:layout_width="wrap_content"
@@ -29,8 +30,11 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp"
         android:gravity="center"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:textColor="@color/negro"
+        />
 
+    <!--LinearLayout para los textos Stock-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,6 +44,7 @@
         android:layout_marginBottom="24dp"
         >
 
+        <!--TextView con el texto Stock-->
         <TextView
             android:id="@+id/txtStock"
             android:layout_width="wrap_content"
@@ -48,8 +53,10 @@
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/negro"/>
 
+        <!--TextView con el Stock del elemento-->
         <TextView
             android:id="@+id/txtStockElemento"
             android:layout_width="wrap_content"
@@ -57,17 +64,20 @@
             android:textSize="24sp"
             android:gravity="center"
             android:textAlignment="center"
-            android:layout_marginStart="12dp"/>
+            android:layout_marginStart="12dp"
+            android:textColor="@color/negro"
+            />
 
     </LinearLayout>
 
-
+    <!--LinearLayout para los botones-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
 
+        <!--Boton eliminar elemento-->
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnEliminar"
@@ -83,6 +93,7 @@
             android:layout_marginStart="8dp"
             app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
 
+        <!--Boton restar stock elemento-->
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnRestar"
@@ -98,6 +109,7 @@
             android:layout_marginStart="8dp"
             app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
 
+        <!--Boton sumar stock elemento-->
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
             android:id="@+id/btnSumar"

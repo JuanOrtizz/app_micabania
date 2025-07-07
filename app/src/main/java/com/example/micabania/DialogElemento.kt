@@ -10,15 +10,17 @@ import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 
 class DialogElemento(
-    private val elemento:String,
-    stock:String,
-    private val onSumar: () -> Unit,
-    private val onRestar: () -> Unit,
-    private val onEliminar: () -> Unit
+    private val elemento:String, // nombre elemento
+    stock:String, // stock
+    private val onSumar: () -> Unit, // funcion callback para sumar stock
+    private val onRestar: () -> Unit, // funcion callback para restar stock
+    private val onEliminar: () -> Unit // funcion callback para eliminar el elemento
 ) : DialogFragment() {
 
+    // capturo el stock numerico
     private var stockNumerico = stock.toInt()
 
+    // Funcion para crear el layout (Dialog)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -26,40 +28,50 @@ class DialogElemento(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //capturo los botones dle dialog
+        val btnCerrar = view.findViewById<ImageButton>(R.id.btnCerrar)
         val txtElemento = view.findViewById<TextView>(R.id.txtElemento)
         val txtStockElemento = view.findViewById<TextView>(R.id.txtStockElemento)
-        val btnCerrar = view.findViewById<ImageButton>(R.id.btnCerrar)
         val btnEliminar = view.findViewById<Button>(R.id.btnEliminar)
         val btnRestar = view.findViewById<Button>(R.id.btnRestar)
         val btnSumar = view.findViewById<Button>(R.id.btnSumar)
 
-        txtElemento.text = elemento
-        txtStockElemento.text = stockNumerico.toString()
+        txtElemento.text = elemento // le asigno el texto
+        txtStockElemento.text = stockNumerico.toString() // le asigno el stock
 
+        // listener para el boton cerrar
         btnCerrar.setOnClickListener {
-            dismiss()
+            dismiss() //cierra el dialog
         }
 
+        //Listener para el boton eliminar
         btnEliminar.setOnClickListener {
-            onEliminar()
-            dismiss()
+            onEliminar() // ejecuta la funcion eliminar
+            dismiss() // cierra el dialog
         }
 
+        //Listener para el boton restar
         btnRestar.setOnClickListener{
-            if (stockNumerico > 0) {
+            // Si stock numerico es mayor a 1 actualiza la UI con la resta
+            if (stockNumerico > 1) {
                 stockNumerico--
                 txtStockElemento.text = stockNumerico.toString()
-                onRestar()
+                onRestar()// ejecuta la funcion restar
             }
         }
 
+        //Listener para el boton sumar
         btnSumar.setOnClickListener{
-            stockNumerico++
-            txtStockElemento.text = stockNumerico.toString()
-            onSumar()
+            //Si el stock numerico es menor a 999 actualiza la UI con la suma
+            if(stockNumerico < 999){
+                stockNumerico++
+                txtStockElemento.text = stockNumerico.toString()
+                onSumar() // ejecuta la funcion sumar
+            }
         }
     }
 
+    // Funcion onStart para mostrar el dialog en las proporciones justas
     override fun onStart() {
         super.onStart()
         // le pongo apariencia trasparente al fondo
