@@ -1,15 +1,16 @@
 <LinearLayout android:orientation="vertical"
+    android:id="@+id/vista_menu_propiedad"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
-    android:paddingTop="60dp"
+    android:paddingTop="40dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--boton para volver atras-->
     <ImageButton
-        android:id="@+id/botonVolver"
+        android:id="@+id/btnVolver"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/icon_volver"
@@ -17,6 +18,7 @@
         android:layout_marginStart="12dp"
         />
 
+    <!--Scroll view para los elementos de la pantalla-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -28,7 +30,6 @@
         android:clipToPadding="false"
         android:paddingBottom="14dp"
         >
-
 
         <LinearLayout
             android:orientation="vertical"
@@ -57,6 +58,7 @@
                     android:padding="12dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:textColor="@color/negro"
                     />
 
                 <!--LinearLayout para la caracteristica (propiedad)-->
@@ -69,7 +71,6 @@
                     android:layout_marginStart="6dp"
                     android:layout_marginEnd="6dp">
 
-
                     <!--Titulo propiedad (nombre)-->
                     <TextView
                         android:layout_width="wrap_content"
@@ -77,10 +78,12 @@
                         android:text="Propiedad:"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="@color/negro"
                         />
 
                     <!--texto (valor)-->
                     <TextView
+                        android:id="@+id/txtNombrePropiedad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Casa Grande Nono"
@@ -88,7 +91,9 @@
                         android:layout_marginStart="6dp"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:textColor="@color/negro"
+                        />
 
                 </LinearLayout>
 
@@ -110,10 +115,12 @@
                         android:text="Ubicacion:"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="@color/negro"
                         />
 
                     <!--texto (valor)-->
                     <TextView
+                        android:id="@+id/txtUbicacionPropiedad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nono, Córdoba"
@@ -121,7 +128,9 @@
                         android:layout_marginStart="6dp"
                         android:maxLines="1"
                         android:ellipsize="end"
-                        android:singleLine="true"/>
+                        android:singleLine="true"
+                        android:textColor="@color/negro"
+                        />
 
                 </LinearLayout>
 
@@ -141,16 +150,64 @@
                         android:text="Cantidad de Habitantes:"
                         android:textStyle="bold"
                         android:textSize="16sp"
+                        android:textColor="@color/negro"
                         />
 
                     <!--texto (valor)-->
                     <TextView
+                        android:id="@+id/txtCHPropiedad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="6"
                         android:textSize="16sp"
                         android:layout_marginStart="6dp"
+                        android:textColor="@color/negro"
                         />
+
+                </LinearLayout>
+
+                <!--LinearLayout para los botones con acciones (exportar PDF y editar propiedad)-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    >
+
+                    <Button
+                        style="@style/Widget.Material3.Button.ElevatedButton"
+                        android:id="@+id/btnExportarPDF"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/grisOscuroBotones"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blanco"
+                        android:layout_marginEnd="8dp"
+                        app:icon="@drawable/icon_exportar_pdf"
+                        app:iconGravity= "textStart"
+                        app:iconPadding = "0dp"
+                        app:iconTint = "@color/blanco"
+                        app:iconSize = "28dp"
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
+
+                    <Button
+                        style="@style/Widget.Material3.Button.ElevatedButton"
+                        android:id="@+id/btnModificarPropiedad"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/celeste"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/blanco"
+                        android:layout_marginStart="8dp"
+                        app:icon="@drawable/icon_editar_propiedad"
+                        app:iconGravity= "textStart"
+                        app:iconPadding = "0dp"
+                        app:iconTint = "@color/blanco"
+                        app:iconSize = "28dp"
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
 
                 </LinearLayout>
 
@@ -175,12 +232,13 @@
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:layout_marginBottom="24dp"
+                    android:textColor="@color/negro"
                     />
 
                 <!--boton categoria cocina-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonCategoriaCocina"
+                    android:id="@+id/btnCategoriaCocina"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -201,7 +259,7 @@
                 <!--boton Categoria blanqueria-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonCategoriaBlanqueria"
+                    android:id="@+id/btnCategoriaBlanqueria"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -222,7 +280,7 @@
                 <!--boton categoria baño-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonCategoriaBaño"
+                    android:id="@+id/btnCategoriaBaño"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -243,7 +301,7 @@
                 <!--boton categoria limpieza-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonCategoriaLimpieza"
+                    android:id="@+id/btnCategoriaLimpieza"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -264,7 +322,7 @@
                 <!--boton categoria exteriores y otros-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonCategoriaExteriores"
+                    android:id="@+id/btnCategoriaExteriores"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -285,7 +343,7 @@
                 <!--boton eliminar propiedad-->
                 <Button
                     style="@style/Widget.Material3.Button.ElevatedButton"
-                    android:id="@+id/botonEliminarPropiedad"
+                    android:id="@+id/btnEliminarPropiedad"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
@@ -312,4 +370,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
