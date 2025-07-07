@@ -3,12 +3,10 @@ package com.example.micabania
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.textfield.TextInputLayout
 
 class AgregarPropiedad : AppCompatActivity() {
@@ -18,6 +16,8 @@ class AgregarPropiedad : AppCompatActivity() {
     private lateinit var etUbicacion:TextInputLayout
     private lateinit var etCantidadHabitantes:TextInputLayout
     private lateinit var btnRegistrarPropiedad:Button
+    private lateinit var dbHelper: AppDBHelper
+    private var idUsuario:Int = 0
 
     // Funcion OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,37 +25,41 @@ class AgregarPropiedad : AppCompatActivity() {
         setContentView(R.layout.activity_agregar_propiedad)
 
         //Inicializo variables al cargar la activity
-        btnVolver = findViewById(R.id.botonVolver)
+        btnVolver = findViewById(R.id.btnVolver)
         etNombre = findViewById(R.id.etNombre)
         etUbicacion = findViewById(R.id.etUbicacion)
         etCantidadHabitantes = findViewById(R.id.etCantidadHabitantes)
-        btnRegistrarPropiedad = findViewById(R.id.botonRegistrarPropiedad)
+        btnRegistrarPropiedad = findViewById(R.id.btnRegistrarPropiedad)
+        dbHelper = DBManager.get()
+        //Capturo el idUsuario del intent
+        idUsuario = intent.getIntExtra("id_usuario",-1)
+        Log.d("DEBUG", "ID usuario recibido: $idUsuario")
 
-
-        /*Listener para el boton volver*/
-        btnVolver.setOnClickListener(){
+        //Listener para el boton volver
+        btnVolver.setOnClickListener{
             finish()
         }
 
-        /*Listener para el boton registrar propiedad*/
-        btnRegistrarPropiedad.setOnClickListener(){
+        //Listener para el boton registrar propiedad
+        btnRegistrarPropiedad.setOnClickListener{
             currentFocus?.clearFocus() // Elimino el foco de los ET
             // Declaro banderas para verificar si los datos ingresados en los ET son validos.
-            var banderaInputNombre = verificarInputNombre()
-            var banderaInputUbicacion = verificarInputUbicacion()
-            var banderaInputCantidadHabitantes = verificarInputCantidadHabitantes()
+            val banderaInputNombre = verificarInputNombre()
+            val banderaInputUbicacion = verificarInputUbicacion()
+            val banderaInputCantidadHabitantes = verificarInputCantidadHabitantes()
 
             // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
             if (banderaInputNombre && banderaInputUbicacion && banderaInputCantidadHabitantes){
-                val nombrePropiedad = etNombre.editText?.text.toString().trim() // Capturo el nombre de la propiedad
-                // ResultIntent para devolver datos del nuevo elemento al menu principal
-                val resultIntent = Intent().apply {
-                    putExtra("mensaje_snackbar", "Registraste  la propiedad ${nombrePropiedad}") //devuelve el mensaje para el snackbar
-                    putExtra("propiedad", nombrePropiedad) // Devuelve el nombre de la propiedad para crear la misma en la UI
+                if(insertarPropiedadDB()){
+                    val nombrePropiedad = etNombre.editText?.text.toString().trim() // Capturo el nombre de la propiedad
+                    // ResultIntent para devolver datos del nuevo elemento al menu principal
+                    val resultIntent = Intent().apply {
+                        putExtra("mensaje_snackbar", "Registraste  la propiedad ${nombrePropiedad}") //devuelve el mensaje para el snackbar
+                    }
+                    // Funcion setResult para enviar los datos.
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()// finalizo esta activity asi gestiono la memoria
                 }
-                //Metodo setResult para enviar los datos.
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()// finalizo esta activity asi gestiono la memoria
             }
         }
     }
@@ -75,7 +79,7 @@ class AgregarPropiedad : AppCompatActivity() {
     //Funciones para validar inputs (ETs)
     //Funcion para validar Input (ET) nombre
     private fun verificarInputNombre():Boolean{
-        var banderaInternaNombre = verificarTextoNombre()
+        val banderaInternaNombre = verificarTextoNombre()
         etNombre.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 etNombre.isErrorEnabled = false
@@ -88,7 +92,7 @@ class AgregarPropiedad : AppCompatActivity() {
 
     //Funcion para validar Input (ET) Ubicacion
     private fun verificarInputUbicacion():Boolean{
-        var banderaInternaUbicacion = verificarTextoUbicacion()
+        val banderaInternaUbicacion = verificarTextoUbicacion()
 
         etUbicacion.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -102,7 +106,7 @@ class AgregarPropiedad : AppCompatActivity() {
 
     //Funcion para validar Input (ET) Cantidad de Habitantes
     private fun verificarInputCantidadHabitantes():Boolean{
-        var banderaInternaCantidadHabitantes = verificarTextoCantidadHabitantes()
+        val banderaInternaCantidadHabitantes = verificarTextoCantidadHabitantes()
 
         etCantidadHabitantes.editText?.setOnFocusChangeListener{ _, hasFocus ->
             if(hasFocus){
@@ -124,7 +128,10 @@ class AgregarPropiedad : AppCompatActivity() {
         }else if(textoNombre.length > 50){
             errorCondicion(etNombre, true, "El nombre no puede tener mas de 50 caracteres" )
             return false
-        }else { // Cuando agregue base de datos, va a hacer una verificacion si ya existe una propeidad con ese nombre
+        }else if(dbHelper.existeNombrePropiedad(textoNombre, idUsuario)){
+            errorCondicion(etNombre, true, "Ya existe una propiedad con ese nombre" )
+            return false
+        }else {
             errorCondicion(etNombre, false, "")
             return true
         }
@@ -164,5 +171,17 @@ class AgregarPropiedad : AppCompatActivity() {
             errorCondicion(etCantidadHabitantes, true, "Este campo no puede estar vacio")
             return false
         }
+    }
+
+    //Funcion para insertar la propiedad en la DB
+    private fun insertarPropiedadDB():Boolean{
+        //Obtengo los valores
+        val nombre = etNombre.editText?.text.toString().trim()
+        val ubicacion = etUbicacion.editText?.text.toString().trim()
+        val cantidadHB = etCantidadHabitantes.editText?.text.toString().trim()
+        val cantidadHBNum = cantidadHB.toInt()
+        // Capturo si se realizo con exito y retorno el valor
+        val ok = dbHelper.insertarPropiedad(idUsuario, nombre, ubicacion, cantidadHBNum)
+        return ok
     }
 }
