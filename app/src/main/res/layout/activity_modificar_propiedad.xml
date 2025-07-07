@@ -1,0 +1,171 @@
+<LinearLayout android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="@color/verdeFondoApp"
+    android:id="@+id/vista_modificar_propiedad"
+    android:gravity="start"
+    android:paddingTop="40dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!--Boton para volver para atras-->
+    <ImageButton
+        android:id="@+id/btnVolver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/icon_volver"
+        android:background="@color/verdeFondoApp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <!--Titulo de la seccion Modificar propiedad-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modificá la propiedad"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:textColor="@color/negro"
+        />
+
+    <!--LinearLayout para los EditText (inputs)-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="16dp"
+        >
+
+        <!--EditText para el nombre de la propiedad-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre"
+            android:textColorHint ="@color/negro"
+            app:hintTextColor ="@color/negro"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/negro"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--EditText para la ubicacion de la propiedad-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ubicación"
+            android:textColorHint ="@color/negro"
+            app:hintTextColor ="@color/negro"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/negro">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--EditText para la cantidad de habitantes de la propiedad-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etCantidadHabitantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad de habitantes"
+            android:textColorHint ="@color/negro"
+            app:hintTextColor ="@color/negro"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="2"
+            app:counterTextColor="@color/negro"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--boton para modificar la propiedad-->
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnActualizarPropiedad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:backgroundTint="@color/verdeClaroBoton"
+            android:text="Actualizar Propiedad"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+            />
+    </LinearLayout>
+
+</LinearLayout>
