@@ -64,7 +64,7 @@ class AppDBHelper(context: Context): SQLiteOpenHelper(context, "MiCabaniaDB", nu
            CREATE TABLE propiedades(
                id INTEGER PRIMARY KEY AUTOINCREMENT,
                id_usuario INTEGER, 
-               nombre TEXT UNIQUE,
+               nombre TEXT,
                ubicacion TEXT,
                cantidad_habitantes INTEGER,
                FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
