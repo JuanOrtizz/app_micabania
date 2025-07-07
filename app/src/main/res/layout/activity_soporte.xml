@@ -1,97 +1,137 @@
-<LinearLayout android:orientation="vertical"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:background="@color/verdeFondoApp"
-    android:gravity="start"
-    android:paddingTop="28dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<androidx.drawerlayout.widget.DrawerLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
-    <!--LinearLayout para la barra de navegacion (futuro menu hamburguesa)-->
-    <LinearLayout
-        android:orientation="vertical"
+    <!--Layout global de la vista-->
+    <LinearLayout android:orientation="vertical"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@color/verdeHeader"
-        android:gravity="center"
+        android:background="@color/verdeFondoApp"
+        android:gravity="start"
         >
 
-        <!--Logo de la app-->
-        <ImageView
-            android:layout_width="wrap_content"
+        <!--ConstraintLayout para la barra de navegacion (menu hamburguesa)-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo_header"
+            android:background="@color/verdeHeader"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
+
+            <!--Boton menu hamburguesa-->
+            <ImageButton
+                android:id="@+id/btnMenuHamburguesa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_menu_hamburguesa"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingStart="30dp"
+                />
+
+            <!--Icono app-->
+            <ImageView
+                android:id="@+id/logoApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_header"
+                android:contentDescription="Logo de la app"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--Titulo de la seccion soporte-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Soporte"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:textColor="@color/negro"
             />
+
+        <!--LinearLayout para los botones contactos-->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            >
+
+            <!--Boton contacto SMS-->
+            <Button
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:id="@+id/btnContactoSms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:padding="10dp"
+                android:backgroundTint="@color/verdeClaroBoton"
+                android:text="Contacto via SMS"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/blanco"
+                app:icon="@drawable/icon_sms"
+                app:iconGravity= "textStart"
+                app:iconPadding = "12dp"
+                app:iconTint = "@color/blanco"
+                app:iconSize = "35dp"
+                app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+                />
+
+            <!--Boton contacto Email-->
+            <Button
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:id="@+id/btnContactoMail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:backgroundTint="@color/verdeClaroBoton"
+                android:text="Contacto via Email"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/blanco"
+                app:icon="@drawable/icon_email"
+                app:iconGravity= "textStart"
+                app:iconPadding = "12dp"
+                app:iconTint = "@color/blanco"
+                app:iconSize = "35dp"
+                app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+                />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <!--Titulo de la seccion soporte-->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Soporte"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+    <!--Menu lateral (el drawer, es decir menu hamburguesa)-->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/drawer_menu"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        android:paddingTop="24dp"
+        app:itemTextColor="@color/verdeElementosMenu"
+        app:itemTextAppearance="@style/TextoMenuDrawer"
+        app:itemBackground="@drawable/divisor_item_menu"
+        app:itemIconSize="24dp"
         />
 
-    <!--LinearLayout para los botones contactos-->
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        >
-
-        <!--Boton contacto SMS-->
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonContactoSms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            android:padding="10dp"
-            android:backgroundTint="@color/verdeClaroBoton"
-            android:text="Contacto via SMS"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            app:icon="@drawable/icon_sms"
-            app:iconGravity= "textStart"
-            app:iconPadding = "12dp"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "35dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
-            />
-
-        <!--Boton contacto Email-->
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonContactoMail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:backgroundTint="@color/verdeClaroBoton"
-            android:text="Contacto via Email"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            app:icon="@drawable/icon_email"
-            app:iconGravity= "textStart"
-            app:iconPadding = "12dp"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "35dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
-            />
-
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

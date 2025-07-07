@@ -1,116 +1,74 @@
-<LinearLayout android:orientation="vertical"
-    android:id="@+id/vista_menu_principal"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:background="@color/verdeFondoApp"
-    android:gravity="start"
-    android:paddingTop="28dp"
+<androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <!--ConstraintLayout para la barra de navegacion (menu hamburguesa) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/verdeHeader"
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:paddingStart="30dp"
-        >
-
-        <!-- Icono menú hamburguesa a la izquierda -->
-        <ImageButton
-            android:id="@+id/botonMenuHamburguesa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_menu_hamburguesa"
-            android:background="@null"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <!-- Logo centrado horizontalmente -->
-        <ImageView
-            android:id="@+id/logoApp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/logo_header"
-            android:contentDescription="Logo de la app"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--Titulo de la seccion menu principal (bienvenida)-->
-    <TextView
-        android:id="@+id/textBienvenida"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="¡Hola Nombre!"
-        android:gravity="center"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:layout_marginTop="48dp"
-        android:layout_marginBottom="48dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        />
-
-    <!--LinearLayout para las propiedades (futuro scroll layout)-->
+    <!--Layout global de la vista-->
     <LinearLayout
-        android:id="@+id/layoutPropiedades"
         android:orientation="vertical"
+        android:id="@+id/vista_menu_principal"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp">
+        android:background="@color/verdeFondoApp"
+        android:gravity="start">
 
-        <!--Boton para entrar a la propiedad de ejemplo-->
-        <Button
-            style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonPropiedadEjemplo"
+        <!--ConstraintLayout para la barra de navegacion (menu hamburguesa)-->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:backgroundTint="@color/verdePropiedad"
-            android:text="Casa Grande Nono"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/blanco"
-            app:icon="@drawable/icon_propiedad"
-            app:iconGravity= "textStart"
-            app:iconPadding = "12dp"
-            app:iconTint = "@color/blanco"
-            app:iconSize = "30dp"
-            app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
-            />
+            android:background="@color/verdeHeader"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp">
 
+            <!--Boton menu hamburguesa-->
+            <ImageButton
+                android:id="@+id/btnMenuHamburguesa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_menu_hamburguesa"
+                android:background="@null"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:paddingStart="30dp"/>
+
+            <!--Icono app-->
+            <ImageView
+                android:id="@+id/logoApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_header"
+                android:contentDescription="Logo de la app"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- RecyclerView para el texto bienvenida, para las propiedades y botona gregar propiedad-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewMenuPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
     </LinearLayout>
-    <!--Boton para agregar propiedad-->
-    <Button
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:id="@+id/botonAgregarPropiedad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:padding="16dp"
-        android:backgroundTint="@color/azul"
-        android:text="Agregar Propiedad"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/blanco"
-        app:icon="@drawable/icon_agregar"
-        app:iconGravity= "textStart"
-        app:iconPadding = "12dp"
-        app:iconTint = "@color/blanco"
-        app:iconSize = "24dp"
-        app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
+
+    <!-- Menu lateral (el drawer, es decir menu hamburguesa) -->
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:menu="@menu/drawer_menu"
+        android:layout_gravity="start"
+        android:background="@color/blanco"
+        android:paddingTop="24dp"
+        app:itemTextColor="@color/verdeElementosMenu"
+        app:itemTextAppearance="@style/TextoMenuDrawer"
+        app:itemBackground="@drawable/divisor_item_menu"
+        app:itemIconSize="24dp"
         />
 
-
-</LinearLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

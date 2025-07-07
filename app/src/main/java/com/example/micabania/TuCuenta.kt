@@ -1,65 +1,179 @@
 package com.example.micabania
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.content.ContextCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class TuCuenta : AppCompatActivity() {
-    // Declaro variable
-    private lateinit var btnCambiarContraseña:Button
-    private lateinit var etNuevaContraseña:TextInputLayout
-    private lateinit var etConfirmarNuevaContraseña:TextInputLayout
+    // Declaro variables
+    private lateinit var drawerLayout: DrawerLayout // drawerLayout del menu hamburguesa
+    private lateinit var btnMenuHamburguesa: ImageButton // boton menu hamburguesa
+    private lateinit var navView: NavigationView
+    private lateinit var etNombre:TextInputLayout
+    private lateinit var etEmail:TextInputLayout
+    private lateinit var etNuevaContrasenia:TextInputLayout
+    private lateinit var etConfirmarNuevaContrasenia:TextInputLayout
+    private lateinit var btnCambiarContrasenia:Button
+    private lateinit var dbHelper: AppDBHelper
+    private lateinit var sharedPref: SharedPreferences
+    private var idUsuario: Int = -1
+
 
     //Metodo OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tu_cuenta)
 
-        // Inicializo la variable al cargar la activity
-        btnCambiarContraseña = findViewById<Button>(R.id.botonCambiarContraseña)
-        etNuevaContraseña = findViewById(R.id.etNuevaContraseña)
-        etConfirmarNuevaContraseña = findViewById(R.id.etConfirmarNuevaContraseña)
+        // Inicializo las variables al cargar la activity
+        drawerLayout = findViewById(R.id.drawer_layout)
+        btnMenuHamburguesa = findViewById(R.id.btnMenuHamburguesa)
+        navView = findViewById(R.id.nav_view)
+        etNombre = findViewById(R.id.etNombre)
+        etEmail = findViewById(R.id.etEmail)
+        etNuevaContrasenia = findViewById(R.id.etNuevaContraseña)
+        etConfirmarNuevaContrasenia = findViewById(R.id.etConfirmarNuevaContraseña)
+        btnCambiarContrasenia = findViewById(R.id.btnCambiarContraseña)
+        dbHelper = DBManager.get()
+        sharedPref = getSharedPreferences("MiCabaniaPrefs", Context.MODE_PRIVATE)
+        idUsuario = sharedPref.getInt("id_usuario", -1)
 
-        /*Listener para el boton registrarse*/
-        btnCambiarContraseña.setOnClickListener(){
+        // Listener al btn menu hamburguesa
+        btnMenuHamburguesa.setOnClickListener {
+            if (drawerLayout.isDrawerOpen(navView)) { //Si esta abierto lo cierra (al menu)
+                drawerLayout.closeDrawer(navView)
+            } else {
+                drawerLayout.openDrawer(navView)// Sino lo abre (al menu)
+            }
+        }
+
+        //Cambio los colores del menu
+        cambiarColoresElementosMenu()
+
+        // Listeners para cada elemento del menu y realizar la navegacion
+        navView.setNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_cuenta -> { // Listener para el item Cuenta
+                    true
+                }
+                R.id.nav_propiedades -> { // Listener para el item Propiedades
+                    finish()
+                    true
+                }
+                R.id.nav_faqs -> { //Listener para el item FAQs
+                    val intent = Intent(this, FAQs::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.nav_soporte -> { // Listener para el item Soporte
+                    val intent = Intent(this, Soporte::class.java)
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                R.id.nav_logout -> { // Listener para el item Logout
+                    // Limpio sharedPreferences al cerrar sesion
+                    with(sharedPref.edit()) {
+                        clear()
+                        apply()
+                    }
+                    val intent = Intent(this, MainActivity::class.java)
+                    // Para evitar que el usuario pueda volver a menu principal volviendo para atras
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                    true
+                }
+                else -> false
+            }.also {
+                drawerLayout.closeDrawers()
+            }
+        }
+
+        // Cargo los datos del usuario en la activity
+        cargarDatosUsuario()
+
+        //Listener para el boton registrarse
+        btnCambiarContrasenia.setOnClickListener{
             currentFocus?.clearFocus()// Elimino el foco de los ET
             // Declaro banderas para verificar si los datos ingresados en los ET son validos.
-            var banderaInputContraseña = verificarInputNuevaContraseña()
-            var banderaInputConfirmarContraseña = verificarInputConfirmarNuevaContraseña()
+            val banderaInputContrasenia = verificarInputNuevaContrasenia()
+            val banderaInputConfirmarContrasenia = verificarInputConfirmarNuevaContrasenia()
 
             // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
-            if (banderaInputContraseña && banderaInputConfirmarContraseña){
+            if (banderaInputContrasenia && banderaInputConfirmarContrasenia){
                 DialogConfirmacion(
                     onConfirmar = {
-                        // Va a ir logica para actualizar la contraseña en la DB
-                        limpiarET() //Limpia los ET
-                        mostrarSnackbar(R.id.vista_tu_cuenta, "Cambiaste tu contraseña") //Muestra el Snackbar
+                        val nuevaContrasenia = etNuevaContrasenia.editText?.text.toString().trim()
+                        if(dbHelper.actualizarContraseniaUsuario(idUsuario,nuevaContrasenia)){
+                            limpiarET() //Limpia los ET
+                            mostrarSnackbar(R.id.vista_tu_cuenta, "Cambiaste tu contraseña") //Muestra el Snackbar
+                        }
                     }
                 ).show(supportFragmentManager, "ConfirmDialog")
             }
         }
     }
 
-    // Funcion para limpiar los campos EditText al cambiar contraseña
-    private fun limpiarET(){
-        etNuevaContraseña.editText?.text?.clear()
-        etConfirmarNuevaContraseña.editText?.text?.clear()
+
+    // Funcion para cambiar los colores de los items del menu
+    private fun cambiarColoresElementosMenu(){
+        navView.itemIconTintList = null // Saco el color gris de los iconos que trae por default
+        val menu = navView.menu // capturo el menu
+        val logoutItem = menu.findItem(R.id.nav_logout) //capturo el elemento logout (CERRAR SESION)
+
+        // Creo un Spannable para cambiar el color del item CERRAR SESION
+        val spannableTitle = SpannableString(logoutItem.title)
+        val rojo = ContextCompat.getColor(this, R.color.rojo)
+        spannableTitle.setSpan(
+            ForegroundColorSpan(rojo),
+            0,
+            spannableTitle.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        // Asigno el titulo con el nuevo color a CERRAR SESION
+        logoutItem.title = spannableTitle
+    }
+
+    // Funcion para cargar los datos del usuario en los et
+    private fun cargarDatosUsuario(){
+        val usuario = dbHelper.obtenerDatosUsuario(idUsuario)
+        etNombre.editText?.setText(usuario.nombre)
+        etEmail.editText?.setText(usuario.email)
     }
 
     //Funcion para mostrar el snackbar
     private fun mostrarSnackbar (idVista:Int, mensaje:String){
         // obtengo el contexto donde se va a mostrar el snackbar
         val contextView = findViewById<View>(idVista)
-        // Crea el snackbar
-        Snackbar.make(contextView, mensaje, Snackbar.LENGTH_LONG).show()
+        // Creo el snackbar
+        val snackbar = Snackbar.make(contextView, mensaje, Snackbar.LENGTH_LONG)
+
+        // Personalizo el snackbar
+        val snackbarView = snackbar.view
+        val background = snackbarView.background
+        background.setTint(Color.DKGRAY)  // Cambio el color de fondo
+        //Capturo el texto
+        val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.setTextColor(Color.WHITE) // Color texto
+        //Muestro el snackbar
+        snackbar.show()
     }
 
     //Funcion para mostrar errores en los inputs (ETs)
@@ -76,72 +190,80 @@ class TuCuenta : AppCompatActivity() {
 
     //Funciones para validar inputs (ETs)
     //Funcion para validar Input (ET) Nueva Contraseña
-    private fun verificarInputNuevaContraseña():Boolean{
-        var banderaInternaNuevaContraseña = verificarTextoNuevaContraseña()
-        etNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+    private fun verificarInputNuevaContrasenia():Boolean{
+        val banderaInternaNuevaContrasenia = verificarTextoNuevaContrasenia()
+        etNuevaContrasenia.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                etNuevaContraseña.isErrorEnabled = false
+                etNuevaContrasenia.isErrorEnabled = false
             } else{
-                verificarTextoNuevaContraseña()
+                verificarTextoNuevaContrasenia()
             }
         }
-        return banderaInternaNuevaContraseña
+        return banderaInternaNuevaContrasenia
     }
 
     //Funcion para validar Input (ET) Confirmar Nueva Contraseña
-    private fun verificarInputConfirmarNuevaContraseña():Boolean{
-        var banderaInternaConfirmarNuevaContraseña = verificarTextoConfirmarNuevaContraseña()
-        etConfirmarNuevaContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+    private fun verificarInputConfirmarNuevaContrasenia():Boolean{
+        val banderaInternaConfirmarNuevaContrasenia = verificarTextoConfirmarNuevaContrasenia()
+        etConfirmarNuevaContrasenia.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                etConfirmarNuevaContraseña.isErrorEnabled = false
+                etConfirmarNuevaContrasenia.isErrorEnabled = false
             } else{
-                verificarTextoConfirmarNuevaContraseña()
+                verificarTextoConfirmarNuevaContrasenia()
             }
         }
-        return banderaInternaConfirmarNuevaContraseña
+        return banderaInternaConfirmarNuevaContrasenia
     }
 
     // Funciones internas para validar el texto (valor) que ingresa el usuario por los Inputs (ETs)
     //Funcion para validar texto (valor) Input (ET) Nueva Contraseña
-    private fun verificarTextoNuevaContraseña():Boolean{
-        val textoNuevaContraseña = etNuevaContraseña.editText?.text?.toString() // captura el texto del et
-        if (textoNuevaContraseña.isNullOrEmpty()) {
-            errorCondicion(etNuevaContraseña, true, "Este campo no puede estar vacío")
+    private fun verificarTextoNuevaContrasenia():Boolean{
+        val textoNuevaContrasenia = etNuevaContrasenia.editText?.text?.toString() // captura el texto del et
+        if (textoNuevaContrasenia.isNullOrEmpty()) {
+            errorCondicion(etNuevaContrasenia, true, "Este campo no puede estar vacío")
             return false
-        } else if (textoNuevaContraseña.length > 30) {
-            errorCondicion(etNuevaContraseña, true, "La contraseña no puede tener más de 30 caracteres")
+        } else if (textoNuevaContrasenia.length > 30) {
+            errorCondicion(etNuevaContrasenia, true, "La contraseña no puede tener más de 30 caracteres")
             return false
-        } else if (textoNuevaContraseña.length < 8) {
-            errorCondicion(etNuevaContraseña, true, "La contraseña debe tener al menos 8 caracteres")
+        } else if (textoNuevaContrasenia.length < 8) {
+            errorCondicion(etNuevaContrasenia, true, "La contraseña debe tener al menos 8 caracteres")
             return false
-        }else if(!textoNuevaContraseña.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\\$%^&*()_\\-+=\\[\\]{};':\"\\\\|,.<>\\/?]).*\$"))) {
-            errorCondicion(etNuevaContraseña, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
+        }else if(!textoNuevaContrasenia.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#%^&*()_\\-+=\\[\\]{};':\"\\\\|,.<>?]).*\$"))) {
+            errorCondicion(etNuevaContrasenia, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
             return false
-            //Cuando agregue DB va a ir otro if para comprobar que no coloque la misma contraseña
+        }else if(dbHelper.verificarContrasenia(idUsuario, textoNuevaContrasenia)) {
+            errorCondicion(etNuevaContrasenia, true, "La nueva contraseña no puede ser igual a la actual.")
+            return false
         }else {
-            errorCondicion(etNuevaContraseña, false, "")
+            errorCondicion(etNuevaContrasenia, false, "")
             return true
         }
     }
 
     //Funcion para validar texto (valor) Input (ET) Nueva Contraseña
-    private fun verificarTextoConfirmarNuevaContraseña():Boolean{
-        val textoNuevaContraseña = etNuevaContraseña.editText?.text?.toString() // captura el texto del et
-        val textoConfirmarNuevaContraseña = etConfirmarNuevaContraseña.editText?.text?.toString() // captura el texto del et
+    private fun verificarTextoConfirmarNuevaContrasenia():Boolean{
+        val textoNuevaContrasenia = etNuevaContrasenia.editText?.text?.toString() // captura el texto del et
+        val textoConfirmarNuevaContrasenia = etConfirmarNuevaContrasenia.editText?.text?.toString() // captura el texto del et
 
-        if(textoConfirmarNuevaContraseña.isNullOrEmpty()){
-            errorCondicion(etConfirmarNuevaContraseña, true, "Este campo no puede estar vacio")
+        if(textoConfirmarNuevaContrasenia.isNullOrEmpty()){
+            errorCondicion(etConfirmarNuevaContrasenia, true, "Este campo no puede estar vacio")
             return false
-        }else if(textoConfirmarNuevaContraseña.length > 30){
-            errorCondicion(etConfirmarNuevaContraseña, true, "La contraseña no puede tener mas de 30 caracteres" )
+        }else if(textoConfirmarNuevaContrasenia.length > 30){
+            errorCondicion(etConfirmarNuevaContrasenia, true, "La contraseña no puede tener mas de 30 caracteres" )
             return false
-        }else if(!textoConfirmarNuevaContraseña.equals(textoNuevaContraseña)){
-            errorCondicion(etConfirmarNuevaContraseña, true, "Las contraseñas no coinciden" )
+        }else if(textoConfirmarNuevaContrasenia != textoNuevaContrasenia){
+            errorCondicion(etConfirmarNuevaContrasenia, true, "Las contraseñas no coinciden" )
             return false
         }
         else {
-            errorCondicion(etConfirmarNuevaContraseña, false, "")
+            errorCondicion(etConfirmarNuevaContrasenia, false, "")
             return true
         }
+    }
+
+    // Funcion para limpiar los campos EditText al cambiar contraseña
+    private fun limpiarET(){
+        etNuevaContrasenia.editText?.text?.clear()
+        etConfirmarNuevaContrasenia.editText?.text?.clear()
     }
 }

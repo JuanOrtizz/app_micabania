@@ -1,0 +1,32 @@
+<!--Menu hamburguesa desplegable (drawer)-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--Item cuenta-->
+    <item
+        android:id="@+id/nav_cuenta"
+        android:title="Cuenta"
+        android:icon="@drawable/icon_tu_cuenta_menu" />
+
+    <!--Item propiedades-->
+    <item
+        android:id="@+id/nav_propiedades"
+        android:title="Propiedades"
+        android:icon="@drawable/icon_tus_propiedades_menu" />
+
+    <!--Item FAQs-->
+    <item
+        android:id="@+id/nav_faqs"
+        android:title="FAQs y Tutoriales"
+        android:icon="@drawable/icon_faqs_menu" />
+
+    <!--Item soporte-->
+    <item
+        android:id="@+id/nav_soporte"
+        android:title="Soporte"
+        android:icon="@drawable/icon_soporte_menu" />
+
+    <!--Item cerrar sesion-->
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Cerrar Sesión"
+        android:icon="@drawable/icon_cerrar_sesion_menu" />
+</menu>

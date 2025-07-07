@@ -1,47 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-
-    <!-- Estilo para tu boton del elemento creado -->
-    <style name="BotonElemento" parent="Widget.Material3.Button.ElevatedButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/blanco</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:textAlignment">textStart</item>
-        <item name="android:padding">10dp</item>
-        <item name="android:backgroundTint">@color/verdeClaroBoton</item>
-        <item name="icon">@drawable/icon_menu_elemento</item>
-        <item name="iconGravity">end</item>
-        <item name="iconTint">@color/blanco</item>
-        <item name="iconSize">24dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Material3.MediumComponent</item>
-    </style>
-
-    <!-- Estilo para tu boton de la propiedad creada -->
-    <style name="BotonPropiedad" parent="Widget.Material3.Button.ElevatedButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAlignment">viewStart</item>
-        <item name="android:gravity">start|center_vertical</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/blanco</item>
-        <item name="android:layout_marginBottom">24dp</item>
-        <item name="android:padding">12dp</item>
-        <item name="android:backgroundTint">@color/verdePropiedad</item>
-        <item name="icon">@drawable/icon_propiedad</item>
-        <item name="iconGravity">textStart</item>
-        <item name="iconPadding">12dp</item>
-        <item name="iconTint">@color/blanco</item>
-        <item name="iconSize">30dp</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:singleLine">true</item>
-        <item name="shapeAppearance">@style/ShapeAppearance.Material3.MediumComponent</item>
+    <!--Style para el texto del item del menu (drawer)-->
+    <style name="TextoMenuDrawer" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/verdeElementosMenu</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
     </style>
 </resources>
