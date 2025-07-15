@@ -1,0 +1,60 @@
+<!--LinearLayout para las acciones de ordenamiento-->
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp"
+    android:layout_marginHorizontal="36dp"
+    android:layout_marginBottom="24dp"
+    android:orientation="vertical"
+    android:background="@drawable/layout_caracteristicas_propiedad"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ordenar por"
+        android:textColor="@color/negro"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        />
+
+    <!--LinearLayout para los botones con acciones de ordenamiento-->
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="6dp"
+        android:layout_marginHorizontal="24dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnOrdenarStock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/celeste"
+            android:text="Stock"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            android:layout_marginEnd="8dp"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
+
+        <Button
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:id="@+id/btnOrdenarAlfabetico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/celeste"
+            android:text="ABC"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/blanco"
+            android:layout_marginStart="8dp"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.MediumComponent" />
+
+    </LinearLayout>
+
+</LinearLayout>

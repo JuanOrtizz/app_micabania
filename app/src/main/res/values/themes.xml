@@ -1,8 +1,16 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.MiCabaña" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!--Colores principales de la app-->
+        <item name="colorPrimary">@color/verdePropiedad</item>
+        <item name="colorPrimaryVariant">@color/verdePropiedad</item>
+        <item name="colorAccent">@color/verdePropiedad</item>
+
+        <!--Barra de estado-->
+        <item name="android:statusBarColor">@color/verdeFondoApp</item>
+
+        <!--Burbuja de seleccion-->
+        <item name="colorControlActivated">@color/verdePropiedad</item>
     </style>
 
     <style name="Theme.MiCabaña" parent="Base.Theme.MiCabaña" />

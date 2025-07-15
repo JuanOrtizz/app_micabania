@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:background="@color/verdeFondoApp"
     android:gravity="start"
-    android:paddingTop="60dp"
+    android:paddingTop="40dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!--Boton para volver para atras-->
     <ImageButton
-        android:id="@+id/botonVolver"
+        android:id="@+id/btnVolver"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:src="@drawable/icon_volver"
@@ -28,6 +28,7 @@
         android:textSize="24sp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
+        android:textColor="@color/negro"
         />
 
     <!--LinearLayout para los EditText (inputs) del formulario de registro-->
@@ -50,11 +51,12 @@
             android:layout_height="wrap_content"
             android:hint="Nombre"
             android:textColorHint ="@color/gris"
-            app:hintTextColor ="@color/gris"
+            app:hintTextColor ="@color/negro"
             app:boxBackgroundColor="@color/grisEditText"
             app:boxStrokeColor ="@color/verdePropiedad"
             app:boxStrokeWidth ="0dp"
             app:boxStrokeErrorColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
             app:errorEnabled ="false"
             app:errorTextColor ="@color/rojo"
             android:layout_marginBottom="15dp"
@@ -63,12 +65,16 @@
             app:cursorColor = "@color/verdePropiedad"
             app:cursorErrorColor = "@color/rojo"
             app:counterEnabled="true"
-            app:counterMaxLength="50">
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/negro">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,25 +86,30 @@
             android:layout_height="wrap_content"
             android:hint="Ubicacion"
             android:textColorHint ="@color/gris"
-            app:hintTextColor ="@color/gris"
+            app:hintTextColor ="@color/negro"
             app:boxBackgroundColor="@color/grisEditText"
             app:boxStrokeColor ="@color/verdePropiedad"
             app:boxStrokeWidth ="0dp"
             app:boxStrokeErrorColor ="@color/rojo"
             app:errorEnabled ="false"
             app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
             android:layout_marginBottom="15dp"
             app:endIconMode="clear_text"
             app:endIconTint = "@color/verdePropiedad"
             app:cursorColor = "@color/verdePropiedad"
             app:cursorErrorColor = "@color/rojo"
             app:counterEnabled="true"
-            app:counterMaxLength="50">
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/negro">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -110,25 +121,30 @@
             android:layout_height="wrap_content"
             android:hint="Cantidad de Habitantes"
             android:textColorHint ="@color/gris"
-            app:hintTextColor ="@color/gris"
+            app:hintTextColor ="@color/negro"
             app:boxBackgroundColor="@color/grisEditText"
             app:boxStrokeColor ="@color/verdePropiedad"
             app:boxStrokeWidth ="0dp"
             app:boxStrokeErrorColor ="@color/rojo"
             app:errorEnabled ="false"
             app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
             android:layout_marginBottom="15dp"
             app:endIconMode="clear_text"
             app:endIconTint = "@color/verdePropiedad"
             app:cursorColor = "@color/verdePropiedad"
             app:cursorErrorColor = "@color/rojo"
             app:counterEnabled="true"
-            app:counterMaxLength="2">
+            app:counterMaxLength="2"
+            app:counterTextColor="@color/negro">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -136,7 +152,7 @@
         <!--boton para registrar la propiedad-->
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/botonRegistrarPropiedad"
+            android:id="@+id/btnRegistrarPropiedad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"

@@ -3,59 +3,61 @@ package com.example.micabania
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Im
-import android.view.View
 import android.widget.Button
-import android.widget.EditText
 import android.widget.ImageButton
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputLayout
 
 class CreaTuCuenta : AppCompatActivity() {
+    // Declaro variables
     private lateinit var btnVolver:ImageButton
     private lateinit var etNombre:TextInputLayout
     private lateinit var etEmail:TextInputLayout
-    private lateinit var etContraseña: TextInputLayout
-    private lateinit var etConfirmarContraseña: TextInputLayout
+    private lateinit var etContrasenia: TextInputLayout
+    private lateinit var etConfirmarContrasenia: TextInputLayout
     private lateinit var btnRegistrarse:Button
+    private lateinit var dbHelper: AppDBHelper
 
+    // Funcion on Create
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_crea_tu_cuenta)
 
         //Inicializo variables al cargar la activity
-        btnVolver =  findViewById(R.id.botonVolver)
+        btnVolver =  findViewById(R.id.btnVolver)
         etNombre = findViewById(R.id.etNombre)
         etEmail = findViewById(R.id.etEmail)
-        etContraseña = findViewById(R.id.etContraseña)
-        etConfirmarContraseña = findViewById(R.id.etConfirmarContraseña)
-        btnRegistrarse = findViewById(R.id.botonRegistrarse)
+        etContrasenia = findViewById(R.id.etContraseña)
+        etConfirmarContrasenia = findViewById(R.id.etConfirmarContraseña)
+        btnRegistrarse = findViewById(R.id.btnRegistrarse)
+        dbHelper = DBManager.get()//Obtengo el objeto DBHelper
 
-        /*Listener para el boton volver*/
-        btnVolver.setOnClickListener(){
+        //Listener para el boton volver
+        btnVolver.setOnClickListener{
             finish()
         }
 
-        /*Listener para el boton registrarse*/
-        btnRegistrarse.setOnClickListener(){
+        //Listener para el boton registrarse
+        btnRegistrarse.setOnClickListener{
             currentFocus?.clearFocus() // Elimino el foco de los ET
             // Declaro banderas para verificar si los datos ingresados en los ET son validos.
-            var banderaInputNombre = verificarInputNombre()
-            var banderaInputEmail = verificarInputEmail()
-            var banderaInputContraseña = verificarInputContraseña()
-            var banderaInputConfirmarContraseña = verificarInputConfirmarContraseña()
+            val banderaInputNombre = verificarInputNombre()
+            val banderaInputEmail = verificarInputEmail()
+            val banderaInputContrasenia = verificarInputContrasenia()
+            val banderaInputConfirmarContrasenia = verificarInputConfirmarContrasenia()
 
             // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
-            if (banderaInputNombre && banderaInputEmail && banderaInputContraseña && banderaInputConfirmarContraseña){
-                // ResultIntent para devolver datos del nuevo elemento al menu principal
-                val resultIntent = Intent().apply {
-                    putExtra("mensaje_snackbar", "Te registraste con éxito") // Devuelve el mensaje para el snackbar
+            if (banderaInputNombre && banderaInputEmail && banderaInputContrasenia && banderaInputConfirmarContrasenia){
+                // Inserto en la DB
+                if(insertarUsuarioDB()){
+                    // ResultIntent para devolver datos del nuevo elemento al menu principal
+                    val resultIntent = Intent().apply {
+                        putExtra("mensaje_snackbar", "Te registraste con éxito") // Devuelve el mensaje para el snackbar
+                    }
+                    //funcion setResult para enviar los datos.
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()// finalizo esta activity asi gestiono la memoria
                 }
-                //Metodo setResult para enviar los datos.
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()// finalizo esta activity asi gestiono la memoria
             }
         }
     }
@@ -75,7 +77,7 @@ class CreaTuCuenta : AppCompatActivity() {
     //Funciones para validar inputs (ETs)
     //Funcion para validar Input (ET) nombre
     private fun verificarInputNombre():Boolean{
-        var banderaInternaNombre = verificarTextoNombre()
+        val banderaInternaNombre = verificarTextoNombre()
         etNombre.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 etNombre.isErrorEnabled = false
@@ -88,7 +90,7 @@ class CreaTuCuenta : AppCompatActivity() {
 
     //Funcion para validar Input (ET) email
     private fun verificarInputEmail():Boolean{
-        var banderaInternaEmail = verificarTextoEmail()
+        val banderaInternaEmail = verificarTextoEmail()
         etEmail.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 etEmail.isErrorEnabled = false
@@ -100,29 +102,29 @@ class CreaTuCuenta : AppCompatActivity() {
     }
 
     //Funcion para validar Input (ET) contraseña
-    private fun verificarInputContraseña():Boolean{
-        var banderaInternaContraseña = verificarTextoContraseña()
-        etContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+    private fun verificarInputContrasenia():Boolean{
+        val banderaInternaContrasenia = verificarTextoContrasenia()
+        etContrasenia.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                etContraseña.isErrorEnabled = false
+                etContrasenia.isErrorEnabled = false
             } else{
-                verificarTextoContraseña()
+                verificarTextoContrasenia()
             }
         }
-        return banderaInternaContraseña
+        return banderaInternaContrasenia
     }
 
     //Funcion para validar Input (ET) confirmar contraseña
-    private fun verificarInputConfirmarContraseña():Boolean{
-        var banderaInternaConfirmarContraseña = verificarTextoConfirmarContraseña()
-        etConfirmarContraseña.editText?.setOnFocusChangeListener { _, hasFocus ->
+    private fun verificarInputConfirmarContrasenia():Boolean{
+        val banderaInternaConfirmarContrasenia = verificarTextoConfirmarContrasenia()
+        etConfirmarContrasenia.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
-                etConfirmarContraseña.isErrorEnabled = false
+                etConfirmarContrasenia.isErrorEnabled = false
             } else{
-                verificarTextoConfirmarContraseña()
+                verificarTextoConfirmarContrasenia()
             }
         }
-         return banderaInternaConfirmarContraseña
+         return banderaInternaConfirmarContrasenia
     }
 
     // Funciones internas para validar el texto (valor) que ingresa el usuario por los Inputs (ETs)
@@ -155,53 +157,67 @@ class CreaTuCuenta : AppCompatActivity() {
             errorCondicion(etEmail, true, "El email no puede tener mas de 320 caracteres" )
             return false
         }else if (!textoEmail.matches(Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"))) { // en un futuro, se va a solicitar una activacion de la cuenta por mail para verificar existencia del correo
-            errorCondicion(etEmail, true, "El email no es valido")
+            errorCondicion(etEmail, true, "El email no es válido")
             return false
-        }else { // Cuando agregue DB va a agregar una validacion para comprobar que no exista una cuenta con ese email
+        }else if(dbHelper.existeEmail(textoEmail)){
+            errorCondicion(etEmail, true, "El email ya esta en uso")
+            return false
+        }else {
             errorCondicion(etEmail, false, "")
             return true
         }
     }
 
     //Funcion para validar texto (valor) Input (ET) Contraseña
-    private fun verificarTextoContraseña():Boolean{
-        val textoContraseña = etContraseña.editText?.text?.toString() // captura el texto del et
-        if (textoContraseña.isNullOrEmpty()) {
-            errorCondicion(etContraseña, true, "Este campo no puede estar vacío")
+    private fun verificarTextoContrasenia():Boolean{
+        val textoContrasenia = etContrasenia.editText?.text?.toString() // captura el texto del et
+        if (textoContrasenia.isNullOrEmpty()) {
+            errorCondicion(etContrasenia, true, "Este campo no puede estar vacío")
             return false
-        } else if (textoContraseña.length > 30) {
-            errorCondicion(etContraseña, true, "La contraseña no puede tener más de 30 caracteres")
+        } else if (textoContrasenia.length > 30) {
+            errorCondicion(etContrasenia, true, "La contraseña no puede tener más de 30 caracteres")
             return false
-        } else if (textoContraseña.length < 8) {
-            errorCondicion(etContraseña, true, "La contraseña debe tener al menos 8 caracteres")
+        } else if (textoContrasenia.length < 8) {
+            errorCondicion(etContrasenia, true, "La contraseña debe tener al menos 8 caracteres")
             return false
-        }else if(!textoContraseña.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#\\\$%^&*()_\\-+=\\[\\]{};':\"\\\\|,.<>\\/?]).*\$"))) {
-            errorCondicion(etContraseña, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
+        }else if(!textoContrasenia.matches(Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[!@#%^&*()_\\-+=\\[\\]{};':\"\\\\|,.<>?]).*\$"))) {
+            errorCondicion(etContrasenia, true, "La contraseña debe incluir mayúscula, minúscula, número y carácter especial.")
             return false
         }else {
-            errorCondicion(etContraseña, false, "")
+            errorCondicion(etContrasenia, false, "")
             return true
         }
     }
 
     //Funcion para validar texto (valor) Input (ET) Confirmar Contraseña
-    private fun verificarTextoConfirmarContraseña():Boolean{
-        val textoContraseña = etContraseña.editText?.text?.toString() // captura el texto del et
-        val textoConfirmarContraseña = etConfirmarContraseña.editText?.text?.toString() // captura el texto del et
+    private fun verificarTextoConfirmarContrasenia():Boolean{
+        val textoContrasenia = etContrasenia.editText?.text?.toString() // captura el texto del et
+        val textoConfirmarContrasenia = etConfirmarContrasenia.editText?.text?.toString() // captura el texto del et
 
-        if(textoConfirmarContraseña.isNullOrEmpty()){
-            errorCondicion(etConfirmarContraseña, true, "Este campo no puede estar vacio")
+        if(textoConfirmarContrasenia.isNullOrEmpty()){
+            errorCondicion(etConfirmarContrasenia, true, "Este campo no puede estar vacio")
             return false
-        }else if(textoConfirmarContraseña.length > 30){
-            errorCondicion(etConfirmarContraseña, true, "La contraseña no puede tener mas de 30 caracteres" )
+        }else if(textoConfirmarContrasenia.length > 30){
+            errorCondicion(etConfirmarContrasenia, true, "La contraseña no puede tener mas de 30 caracteres" )
             return false
-        }else if(!textoConfirmarContraseña.equals(textoContraseña)){
-            errorCondicion(etConfirmarContraseña, true, "Las contraseñas no coinciden" )
+        }else if(textoConfirmarContrasenia != textoContrasenia){
+            errorCondicion(etConfirmarContrasenia, true, "Las contraseñas no coinciden" )
             return false
         }
         else {
-            errorCondicion(etConfirmarContraseña, false, "")
+            errorCondicion(etConfirmarContrasenia, false, "")
             return true
         }
+    }
+
+    //Funcion para insertar el nuevo usuario en la DB
+    private fun insertarUsuarioDB(): Boolean{
+        //obtengo los valores
+        val nombre = etNombre.editText?.text.toString().trim()
+        val email = etEmail.editText?.text.toString().trim().lowercase()
+        val contrasenia = etContrasenia.editText?.text.toString().trim()
+
+        val guardado = dbHelper.insertarUsuario(nombre, email, contrasenia)
+        return guardado
     }
 }

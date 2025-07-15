@@ -14,7 +14,9 @@ class AgregarElemento : AppCompatActivity() {
     private lateinit var etNombre: TextInputLayout
     private lateinit var etStock: TextInputLayout
     private lateinit var btnRegistrarElemento: Button
-
+    private lateinit var dbHelper: AppDBHelper
+    private var idPropiedad:Int = -1
+    private var idCategoria:Int = -1
 
     //Funcion OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,40 +24,42 @@ class AgregarElemento : AppCompatActivity() {
         setContentView(R.layout.activity_agregar_elemento)
 
         // Inicializo las variables al cargar la activity
-        btnVolver = findViewById(R.id.botonVolver)
+        btnVolver = findViewById(R.id.btnVolver)
         etNombre = findViewById(R.id.etNombre)
         etStock = findViewById(R.id.etStock)
-        btnRegistrarElemento = findViewById(R.id.botonRegistrarElemento)
+        btnRegistrarElemento = findViewById(R.id.btnRegistrarElemento)
+        dbHelper = DBManager.get()
 
+        //Obtengo valores de la activity anterior
+        idPropiedad = intent.getIntExtra("id_propiedad",-1)
+        idCategoria = intent.getIntExtra("id_categoria", -1)
 
-        /*Listener para el boton volver (ImageButton)*/
-        btnVolver.setOnClickListener() {
+        //Listener para el boton volver (ImageButton)
+        btnVolver.setOnClickListener{
             finish()
         }
 
-        /*Listener para el boton Registrar elemento*/
-        btnRegistrarElemento.setOnClickListener() {
+        //Listener para el boton Registrar elemento
+        btnRegistrarElemento.setOnClickListener{
             currentFocus?.clearFocus() // Elimino el foco de los ET
             // Declaro banderas para verificar si los datos ingresados en los ET son validos.
-            var banderaInputNombre = verificarInputNombre()
-            var banderaInputStock = verificarInputStock()
+            val banderaInputNombre = verificarInputNombre()
+            val banderaInputStock = verificarInputStock()
 
             // Si las banderas son verdaderas, no hay errores en la verificaciones, ejecuta este if
             if (banderaInputNombre && banderaInputStock) {
-                val nombreElemento = etNombre.editText?.text.toString().trim() // Captura el nombre del elemento
-                val stock = etStock.editText?.text.toString().trim()// Captura el stock del elemento
-                val stockNumerico = stock.toInt() // Lo paso a Int
+                if(insertarPropiedadDB()){
+                    val nombreElemento = etNombre.editText?.text.toString().trim() // Captura el nombre del elemento
 
-                // ResultIntent para devolver datos del nuevo elemento a la categoria
-                val resultIntent = Intent().apply {
-                    putExtra("mensaje_snackbar", "Registraste ${nombreElemento}") // Pasa el mensaje para el snackbar
-                    putExtra("stockElemento", stockNumerico) // Pasa el stock para crear el elemento en esa activity
-                    putExtra("nombreElemento", nombreElemento) // Pasa el nombre del elemento
+                    // ResultIntent para devolver datos del nuevo elemento a la categoria
+                    val resultIntent = Intent().apply {
+                        putExtra("mensaje_snackbar", "Registraste ${nombreElemento}") // Pasa el mensaje para el snackbar
+
+                    }
+                    //Funcion setResult para enviar los datos.
+                    setResult(Activity.RESULT_OK, resultIntent)
+                    finish()// finalizo esta activity asi gestiono la memoria
                 }
-
-                //Metodo setResult para enviar los datos.
-                setResult(Activity.RESULT_OK, resultIntent)
-                finish()// finalizo esta activity asi gestiono la memoria
             }
         }
     }
@@ -75,7 +79,7 @@ class AgregarElemento : AppCompatActivity() {
     //Funciones para validar inputs (ETs)
     //Funcion para validar Input (ET) nombre
     private fun verificarInputNombre(): Boolean {
-        var banderaInternaNombre = verificarTextoNombre()
+        val banderaInternaNombre = verificarTextoNombre()
 
         etNombre.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -89,7 +93,7 @@ class AgregarElemento : AppCompatActivity() {
 
     //Funcion para validar Input (ET) Stock
     private fun verificarInputStock(): Boolean {
-        var banderaInternaStock = verificarTextoStock()
+        val banderaInternaStock = verificarTextoStock()
 
         etStock.editText?.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
@@ -111,7 +115,10 @@ class AgregarElemento : AppCompatActivity() {
         } else if (textoNombre.length > 100) {
             errorCondicion(etNombre, true, "El nombre no puede tener mas de 100 caracteres")
             return false
-        } else { // va a hacer una verificacion para ver si ya existe un elemento con ese nombre para evitar duplicados
+        } else if (dbHelper.existeNombreElemento(textoNombre, idPropiedad, idCategoria)) {
+            errorCondicion(etNombre, true, "Ya existe un elemento con ese nombre")
+            return false
+        } else {
             errorCondicion(etNombre, false, "")
             return true
         }
@@ -136,5 +143,16 @@ class AgregarElemento : AppCompatActivity() {
             errorCondicion(etStock, true, "Este campo no puede estar vacio")
             return false
         }
+    }
+
+    //Funcion para insertar el elemento en la DB
+    private fun insertarPropiedadDB():Boolean{
+        //Obtengo los valores
+        val nombre = etNombre.editText?.text.toString().trim()
+        val stock = etStock.editText?.text.toString().trim()
+        val stockNum = stock.toInt()
+        //Inserto en la DB
+        val ok = dbHelper.insertarElemento(idPropiedad, idCategoria, nombre, stockNum)
+        return ok
     }
 }

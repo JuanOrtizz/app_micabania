@@ -1,27 +1,38 @@
 <LinearLayout android:orientation="vertical"
-    android:id="@+id/vista_main"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:background="@color/verdeFondoLogin"
+    android:background="@color/verdeFondoApp"
+    android:id="@+id/vista_modificar_propiedad"
     android:gravity="start"
-    android:paddingTop="120dp"
+    android:paddingTop="40dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!--Titulo de la seccion iniciar sesion-->
+    <!--Boton para volver para atras-->
+    <ImageButton
+        android:id="@+id/btnVolver"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/icon_volver"
+        android:background="@color/verdeFondoApp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="32dp"
+        />
+
+    <!--Titulo de la seccion Modificar propiedad-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Inicia Sesión"
+        android:text="Modificá la propiedad"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="36sp"
+        android:textSize="24sp"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:textColor="@color/negro"
         />
 
-    <!--LinearLayout para los editText (inputs) del formulario de inicio de sesion-->
+    <!--LinearLayout para los EditText (inputs)-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -34,16 +45,15 @@
         android:layout_marginTop="16dp"
         >
 
-        <!--EditText para el email del usuario-->
-        <!--EditText para el email del usuario-->
+        <!--EditText para el nombre de la propiedad-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etEmail"
+            android:id="@+id/etNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:textColorHint ="@color/gris"
+            android:hint="Nombre"
+            android:textColorHint ="@color/negro"
             app:hintTextColor ="@color/negro"
-            app:boxBackgroundColor="@color/blanco"
+            app:boxBackgroundColor="@color/grisEditText"
             app:boxStrokeColor ="@color/verdePropiedad"
             app:boxStrokeWidth ="0dp"
             app:boxStrokeErrorColor ="@color/rojo"
@@ -56,28 +66,30 @@
             app:cursorColor = "@color/verdePropiedad"
             app:cursorErrorColor = "@color/rojo"
             app:counterEnabled="true"
-            app:counterMaxLength="320"
+            app:counterMaxLength="50"
             app:counterTextColor="@color/negro"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:textColor="@color/negro"
-                android:textColorHighlight="@color/verdeFondoLogin" />
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--EditText para la contraseña del usuario-->
+
+        <!--EditText para la ubicacion de la propiedad-->
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etContraseña"
+            android:id="@+id/etUbicacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:textColorHint ="@color/gris"
+            android:hint="Ubicación"
+            android:textColorHint ="@color/negro"
             app:hintTextColor ="@color/negro"
-            app:boxBackgroundColor="@color/blanco"
+            app:boxBackgroundColor="@color/grisEditText"
             app:boxStrokeColor ="@color/verdePropiedad"
             app:boxStrokeWidth ="0dp"
             app:boxStrokeErrorColor ="@color/rojo"
@@ -85,71 +97,75 @@
             app:errorTextColor ="@color/rojo"
             app:errorIconTint="@color/rojo"
             android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
             app:endIconTint = "@color/verdePropiedad"
             app:cursorColor = "@color/verdePropiedad"
             app:cursorErrorColor = "@color/rojo"
-            app:endIconMode="password_toggle"
             app:counterEnabled="true"
-            app:counterMaxLength="30"
-            app:counterTextColor="@color/negro"
-            >
+            app:counterMaxLength="50"
+            app:counterTextColor="@color/negro">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:textColor="@color/negro"
                 android:textColorHighlight="@color/verdeFondoLogin"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--Boton para ingresar(iniciar sesion)-->
+
+        <!--EditText para la cantidad de habitantes de la propiedad-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/etCantidadHabitantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cantidad de habitantes"
+            android:textColorHint ="@color/negro"
+            app:hintTextColor ="@color/negro"
+            app:boxBackgroundColor="@color/grisEditText"
+            app:boxStrokeColor ="@color/verdePropiedad"
+            app:boxStrokeWidth ="0dp"
+            app:boxStrokeErrorColor ="@color/rojo"
+            app:errorEnabled ="false"
+            app:errorTextColor ="@color/rojo"
+            app:errorIconTint="@color/rojo"
+            android:layout_marginBottom="15dp"
+            app:endIconMode="clear_text"
+            app:endIconTint = "@color/verdePropiedad"
+            app:cursorColor = "@color/verdePropiedad"
+            app:cursorErrorColor = "@color/rojo"
+            app:counterEnabled="true"
+            app:counterMaxLength="2"
+            app:counterTextColor="@color/negro"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/negro"
+                android:textColorHighlight="@color/verdeFondoLogin"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <!--boton para modificar la propiedad-->
         <Button
             style="@style/Widget.Material3.Button.ElevatedButton"
-            android:id="@+id/btnIngresar"
+            android:id="@+id/btnActualizarPropiedad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:backgroundTint="@color/verdeClaroBoton"
-            android:text="Ingresar"
-            android:textSize="18sp"
+            android:text="Actualizar Propiedad"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/blanco"
             app:shapeAppearance = "@style/ShapeAppearance.Material3.MediumComponent"
             />
-
-    </LinearLayout>
-
-    <!--LinearLayout para registrarse-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginTop="0dp">
-
-        <!--texto de guia-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="¿No sos usuario?"
-            android:layout_marginEnd="20dp"
-            android:textColor="@color/grisOscuroBotones"/>
-
-        <!--texto para crear la cuenta-->
-        <TextView
-            android:id="@+id/btnCrearCuenta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Creá tu cuenta"
-            android:layout_marginStart="20dp"
-            android:textColor="@color/azul"
-            android:textStyle="bold"/>
-
     </LinearLayout>
 
 </LinearLayout>
