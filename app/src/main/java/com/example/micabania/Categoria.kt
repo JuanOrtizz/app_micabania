@@ -26,6 +26,7 @@ class Categoria : AppCompatActivity() {
     private var idImagen:Int = -1
     private var idCategoria:Int = -1
     private var nombreCategoria:String = ""
+    private var filtroActual: Ordenamiento? = null
 
     //Funcion OnCreate
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,15 +133,36 @@ class Categoria : AppCompatActivity() {
 
         //Creo una lista de CategoriaItem que esta definido en el adapter
         val items = mutableListOf<CategoriaItem>()
+        // Creo una lista de los elementos filtrados, por si aplica filtros a la categoria
+        var elementosFiltrados: List<Elemento>
 
         //Agrego en la lista los valores a mostrar
         items.add(CategoriaItem.CategoriaTitulo(idImagen, nombreCategoria)) //Mando el nombre de la categoria
+        items.add(CategoriaItem.FiltrosOrdenamiento(filtroActual)) // Mando los filtros
         items.addAll(elementos.map { CategoriaItem.Elemento(it.id!!, it.stock!!, it.nombre!!) }) //Mando sus elementos
         items.add(CategoriaItem.AgregarElemento) // Mando el boton
 
         //Creo el adapter con los items y las funciones callback
-        val adapter = AdapterCategoria(
+        adapter = AdapterCategoria(
             items,
+            onClickFiltroStock = {
+                filtroActual = if (filtroActual == Ordenamiento.STOCK) null else Ordenamiento.STOCK
+                val elementosFiltrados = if (filtroActual != null) { // Si el filtro no es null, filtra por ese filtro
+                    dbHelper.ordenarElementos(idPropiedad, idCategoria, filtroActual!!)
+                } else {
+                    dbHelper.obtenerElementosCategoria(idPropiedad, idCategoria) //Sino los carga por id
+                }
+                actualizarAdapterRV(elementosFiltrados) // actualizo el adapter
+            },
+            onClickFiltroAlfabetico = {
+                filtroActual = if (filtroActual == Ordenamiento.ALFABETICO) null else Ordenamiento.ALFABETICO
+                val elementosFiltrados = if (filtroActual != null) { // Si el filtro no es null, filtra por ese filtro
+                    dbHelper.ordenarElementos(idPropiedad, idCategoria, filtroActual!!)
+                } else {
+                    dbHelper.obtenerElementosCategoria(idPropiedad, idCategoria)//Sino los carga por id
+                }
+                actualizarAdapterRV(elementosFiltrados)// actualizo el adapter
+            },
             onClickElemento = { idElemento -> // Listener para el click en el elemento
                 val elemento = dbHelper.obtenerDatosElementoCategoria(idElemento) // obtengo los datos del elemento
                 // Creo el dialog
@@ -175,13 +197,21 @@ class Categoria : AppCompatActivity() {
     }
 
     //Funcion para actualizar el adapter al agregar o eliminar un elemento
-    private fun actualizarAdapterRV(){
-        val elementos = dbHelper.obtenerElementosCategoria(idPropiedad, idCategoria) //Obtiene de nuevo los elementos
+    private fun actualizarAdapterRV(elementosFiltrados: List<Elemento>? = null){
+        var elementos:List<Elemento> // creo una lista de elementos
+        if (elementosFiltrados != null){ // Si elementos filtrados no es null, muestra los elementos filtrados
+            elementos = elementosFiltrados
+        }else if (filtroActual != null) { // Si el filtro actual no es null, mantiene el filtro en actualizaciones de stock
+            elementos = dbHelper.ordenarElementos(idPropiedad, idCategoria, filtroActual!!)
+        }else{ // Sino muestra los elementos por id
+            elementos = dbHelper.obtenerElementosCategoria(idPropiedad, idCategoria) //Obtiene de nuevo los elementos
+        }
         val items = mutableListOf<CategoriaItem>().apply {
             add(CategoriaItem.CategoriaTitulo(idImagen, nombreCategoria)) //Pasa la imagen y el nombre de la categoria
+            add(CategoriaItem.FiltrosOrdenamiento(filtroActual)) // Paso los filtros
             addAll(elementos.map { CategoriaItem.Elemento(it.id!!, it.stock!!, it.nombre!!) }) // Pasa los elementos
             add(CategoriaItem.AgregarElemento)//Pasa el boton de agregar elemento
         }
-        adapter.updateItems(items) //Actualiza los items (Layout categoria, btns elementos y btn agregar elemento)
+        adapter.updateItems(items) //Actualiza los items (Layout categoria, filtros, btns elementos y btn agregar elemento)
     }
 }

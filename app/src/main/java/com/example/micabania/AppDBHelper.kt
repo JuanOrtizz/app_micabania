@@ -31,6 +31,12 @@ data class Elemento(
 
 data class CategoriaElemento(val id: Int, val nombre: String)
 
+//Clase enum con valores fijo para la funcion ordernarElementos (por stock o por orden alfabetico)
+enum class Ordenamiento{
+    STOCK,
+    ALFABETICO
+}
+
 //Clase para el DBHelper de SQLiteOpenHelper
 class AppDBHelper(context: Context): SQLiteOpenHelper(context, "MiCabaniaDB", null, 1) {
 
@@ -446,6 +452,34 @@ class AppDBHelper(context: Context): SQLiteOpenHelper(context, "MiCabaniaDB", nu
     fun eliminarElemento(idElemento: Int) {
         val db = writableDatabase
         db.delete("elementos", "id = ?", arrayOf(idElemento.toString())) //Elimina el elemento
+    }
+
+    // Funcion para ordernar los elementos por stock o alfabeticamente
+    fun ordenarElementos(idPropiedad: Int, idCategoria: Int, tipoOrdenamiento: Ordenamiento): List<Elemento>{
+        val elementos = mutableListOf<Elemento>()
+        val db = readableDatabase
+        // Capturo el tipo de ordenamiento (ENUM) y devuelvo el tipo de ordenamiento a realizar en la consulta SQL
+        val ordenamiento = when (tipoOrdenamiento){
+            Ordenamiento.STOCK -> "stock"
+            Ordenamiento.ALFABETICO -> "nombre"
+        }
+
+        val cursor = db.rawQuery(
+            "SELECT id, stock, nombre FROM elementos WHERE id_propiedad = ? AND id_categoria = ? ORDER BY ${ordenamiento}",
+            arrayOf(idPropiedad.toString(), idCategoria.toString())
+        )
+
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(0)
+                val stock = cursor.getInt(1)
+                val nombre = cursor.getString(2)
+                elementos.add(Elemento(id = id, stock = stock, nombre = nombre))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return elementos
     }
 
     //Funcion para Categorias
